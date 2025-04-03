@@ -17,20 +17,20 @@ namespace csg_tree_generator
 			   true);
 
 			root = new Node();
-			root.x = 100;
-			root.y = 100;
+			root.X = 100;
+			root.Y = 100;
 			root.left = new Node();
-			root.left.x = 50;
-			root.left.y = 50;
+			root.left.X = 50;
+			root.left.Y = 50;
 			root.right = new Node();
-			root.right.x = 150;
-			root.right.y = 50;
+			root.right.X = 150;
+			root.right.Y = 50;
 			root.left.left = new Node();
-			root.left.left.x = 25;
-			root.left.left.y = 25;
+			root.left.left.X = 25;
+			root.left.left.Y = 25;
 			root.left.right = new Node();
-			root.left.right.x = -75;
-			root.left.right.y = -25;
+			root.left.right.X = -75;
+			root.left.right.Y = -25;
 
 		}
 		Node root;
@@ -47,8 +47,8 @@ namespace csg_tree_generator
 			
 			if (active != null)
 			{
-				active.x = (int)((e.X - Draw.camera.x) / Draw.camera.scale);
-				active.y = (int)((e.Y - Draw.camera.y) /Draw.camera.scale);
+				CanvasCordinates canvasCordinates = new CanvasCordinates(e.X, e.Y);
+				active.WorldCordinates = canvasCordinates.WorldCordinates(Draw.camera);
 			}
 			if(movingScene)
 			{
@@ -86,12 +86,10 @@ namespace csg_tree_generator
 		bool movingScene = false;
 		private void mainWindow_MouseDown(object sender, MouseEventArgs e)
 		{
-			int x = (int)((e.X- Draw.camera.x)/Draw.camera.scale);
-			int y = (int)((e.Y - Draw.camera.y) / Draw.camera.scale);
+			
+			WorldCordinates worldCordinates = new CanvasCordinates(e.X, e.Y).WorldCordinates(Draw.camera);
 
-			Debug.WriteLine($"x: {x} y: {y}");
-
-			active = root.DetectNode(x, y);
+			active = root.DetectNode(worldCordinates);
 			if(active==null)
 			{
 				lastPoint = new Point(e.X, e.Y);

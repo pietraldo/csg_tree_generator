@@ -14,24 +14,42 @@ namespace csg_tree_generator
 		public Node? right = null;
 
 		// drawing parameters
-		public int x = 0;
-		public int y = 0;
-	
-		public Node DetectNode(int x,int y)
+		public int X { get; set; }
+		public int Y { get; set; }
+
+		public WorldCordinates WorldCordinates
 		{
-			if (this.x - Draw.circleRadius < x && this.x + Draw.circleRadius > x &&
-								this.y - Draw.circleRadius < y && this.y + Draw.circleRadius > y)
+			get
+			{
+				return new WorldCordinates(X, Y);
+			}
+			set
+			{
+				X = value.X;
+				Y = value.Y;
+			}
+		}
+
+		public CanvasCordinates CanvasCordinates(Camera camera)
+		{
+			return WorldCordinates.CanvasCordinates(camera);
+		}
+
+		public Node? DetectNode(WorldCordinates wc)
+		{
+			if (X - Draw.circleRadius <wc.X  && X + Draw.circleRadius > wc.X &&
+								Y - Draw.circleRadius < wc.Y && Y + Draw.circleRadius > wc.Y)
 			{
 				return this;
 			}
 			if (left != null)
 			{
-				Node? leftNode = left.DetectNode(x, y);
+				Node? leftNode = left.DetectNode(wc);
 				if (leftNode != null) return leftNode;
 			}
 			if (right != null)
 			{
-				Node? rightNode = right.DetectNode(x, y);
+				Node? rightNode = right.DetectNode(wc);
 				if (rightNode != null) return rightNode;
 			}
 			return null;
