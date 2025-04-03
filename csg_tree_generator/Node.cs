@@ -54,6 +54,18 @@ namespace csg_tree_generator
 			}
 			return null;
 		}
+
+		public bool AddChild(Node child)
+		{
+			if (left == null)
+				left = child;
+			else if (right == null)
+				right = child;
+			else
+				return false;
+			child.parent = this;
+			return true;
+		}
 	}
 
 }

@@ -79,6 +79,17 @@ public partial class mainWindow : Form
 
 	private void mainWindow_MouseUp(object sender, MouseEventArgs e)
 	{
+		WorldCordinates worldCordinates = new CanvasCordinates(e.X, e.Y).WorldCordinates(scene.camera);
+		if (mouseMode == MouseMode.MoveTree)
+		{
+			foreach (Node root in scene.trees)
+			{
+				Node? node = root.DetectNode(worldCordinates);
+				if (node == null || scene.draggingNode==node) continue;
+
+				if (scene.JoinTrees(node)) break;
+			}
+		}
 		scene.draggingNode = null;
 		mouseMode = MouseMode.None;
 	}

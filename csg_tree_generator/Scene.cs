@@ -73,5 +73,19 @@ namespace csg_tree_generator
 			}
 		}
 
+		public bool JoinTrees(Node node)
+		{
+			if(draggingTree == null) return false;
+			if(!trees.Contains(draggingTree)) return false;
+
+			if(node.AddChild(draggingTree))
+			{
+				trees.Remove(draggingTree);
+				MoveWholeTree(draggingTree, 40, 40);
+				return true;
+			}
+			return false;
+		}
+
 	}
 }
