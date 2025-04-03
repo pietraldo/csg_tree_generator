@@ -9,18 +9,23 @@ namespace csg_tree_generator
 	public class Draw
 	{
 		public static int circleRadius = 15;
-		public static Camera camera = new Camera();
+		public Camera camera;
 
-		private static void DrawCircle(CanvasCordinates cc, System.Drawing.Graphics g)
+		public Draw(Camera camera)
+		{
+			this.camera = camera;
+		}
+
+		private void DrawCircle(CanvasCordinates cc, System.Drawing.Graphics g)
 		{
 			g.FillEllipse(System.Drawing.Brushes.Blue, cc.X-circleRadius*camera.scale, cc.Y - circleRadius * camera.scale, circleRadius*2*camera.scale, circleRadius*2*camera.scale);
 		}
-		private static void DrawLine(CanvasCordinates cc1, CanvasCordinates cc2, System.Drawing.Graphics g)
+		private void DrawLine(CanvasCordinates cc1, CanvasCordinates cc2, System.Drawing.Graphics g)
 		{
 			g.DrawLine(System.Drawing.Pens.Blue, cc1.X, cc1.Y, cc2.X, cc2.Y);
 		}
 
-		public static void DrawNode(Node node, System.Drawing.Graphics g)
+		public void DrawNode(Node node, System.Drawing.Graphics g)
 		{
 			if (node == null) return;
 
@@ -40,11 +45,5 @@ namespace csg_tree_generator
 			}
 		}
 
-		public static Node DetectNode(Node node, WorldCordinates worldCordinates)
-		{
-			if (node == null) return null;
-
-			return node.DetectNode(worldCordinates);
-		}
 	}
 }

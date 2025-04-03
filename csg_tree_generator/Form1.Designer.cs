@@ -48,7 +48,6 @@
 			Controls.Add(panel1);
 			Name = "mainWindow";
 			Text = "Form1";
-			Scroll += mainWindow_Scroll;
 			Paint += mainWindow_Paint;
 			MouseDown += mainWindow_MouseDown;
 			MouseMove += mainWindow_MouseMove;
