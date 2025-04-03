@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			panel1 = new Panel();
+			lblStatus = new Label();
 			SuspendLayout();
 			// 
 			// panel1
@@ -40,23 +41,36 @@
 			panel1.Size = new Size(200, 450);
 			panel1.TabIndex = 0;
 			// 
+			// lblStatus
+			// 
+			lblStatus.AutoSize = true;
+			lblStatus.Location = new Point(2, 9);
+			lblStatus.Name = "lblStatus";
+			lblStatus.Size = new Size(38, 15);
+			lblStatus.TabIndex = 1;
+			lblStatus.Text = "label1";
+			// 
 			// mainWindow
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(800, 450);
+			Controls.Add(lblStatus);
 			Controls.Add(panel1);
 			Name = "mainWindow";
 			Text = "Form1";
 			Paint += mainWindow_Paint;
+			KeyPress += mainWindow_KeyPress;
 			MouseDown += mainWindow_MouseDown;
 			MouseMove += mainWindow_MouseMove;
 			MouseUp += mainWindow_MouseUp;
 			ResumeLayout(false);
+			PerformLayout();
 		}
 
 		#endregion
 
 		private Panel panel1;
+		private Label lblStatus;
 	}
 }

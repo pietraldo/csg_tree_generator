@@ -9,12 +9,20 @@ public enum MouseMode
 	MoveScene,
 	MoveTree
 }
+
+public enum EditingMode
+{
+	None,
+	RemoveNode
+}
+
 public partial class mainWindow : Form
 {
 
 	CanvasCordinates lastMousePoint;
 	Scene scene;
 	MouseMode mouseMode = MouseMode.None;
+	EditingMode editingMode = EditingMode.None;
 	public mainWindow()
 	{
 
@@ -35,6 +43,7 @@ public partial class mainWindow : Form
 		e.Graphics.Clear(Color.White);
 
 		scene.DrawTrees(e.Graphics);
+		this.lblStatus.Text=editingMode.ToString();
 	}
 
 	private void mainWindow_MouseMove(object sender, MouseEventArgs e)
@@ -82,15 +91,17 @@ public partial class mainWindow : Form
 		WorldCordinates worldCordinates = new CanvasCordinates(e.X, e.Y).WorldCordinates(scene.camera);
 		if (mouseMode == MouseMode.MoveTree)
 		{
+
 			foreach (Node root in scene.trees)
 			{
 				Node? node = root.DetectNode(worldCordinates);
-				if (node == null || scene.draggingNode==node) continue;
+				if (node == null || scene.draggingTree == node) continue;
 
 				if (scene.JoinTrees(node)) break;
 			}
+			mouseMode = MouseMode.None;
+
 		}
-		scene.draggingNode = null;
 		mouseMode = MouseMode.None;
 	}
 
@@ -107,6 +118,11 @@ public partial class mainWindow : Form
 
 			if (e.Button == MouseButtons.Right)
 			{
+				if(editingMode == EditingMode.RemoveNode)
+				{
+					scene.DetachTree(node);
+					break;
+				}
 				scene.draggingTree = node;
 				mouseMode = MouseMode.MoveTree;
 
@@ -121,13 +137,24 @@ public partial class mainWindow : Form
 		}
 
 
-		if (!isDragingNode)
+		if (mouseMode == MouseMode.None)
 		{
 			lastMousePoint = new CanvasCordinates(e.X, e.Y);
 			mouseMode = MouseMode.MoveScene;
 		}
 	}
 
-
+	private void mainWindow_KeyPress(object sender, KeyPressEventArgs e)
+	{
+		if(e.KeyChar == 'd')
+		{
+			editingMode = EditingMode.RemoveNode;
+		}
+		else
+		{
+			editingMode=EditingMode.None;
+		}
+		Invalidate();
+	}
 }
 
