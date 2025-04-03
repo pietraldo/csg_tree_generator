@@ -47,8 +47,8 @@ namespace csg_tree_generator
 			
 			if (active != null)
 			{
-				active.x = e.X;
-				active.y = e.Y;
+				active.x = (int)((e.X - Draw.camera.x) / Draw.camera.scale);
+				active.y = (int)((e.Y - Draw.camera.y) /Draw.camera.scale);
 			}
 			if(movingScene)
 			{
@@ -86,7 +86,12 @@ namespace csg_tree_generator
 		bool movingScene = false;
 		private void mainWindow_MouseDown(object sender, MouseEventArgs e)
 		{
-			active = root.DetectNode(e.X, e.Y);
+			int x = (int)((e.X- Draw.camera.x)/Draw.camera.scale);
+			int y = (int)((e.Y - Draw.camera.y) / Draw.camera.scale);
+
+			Debug.WriteLine($"x: {x} y: {y}");
+
+			active = root.DetectNode(x, y);
 			if(active==null)
 			{
 				lastPoint = new Point(e.X, e.Y);

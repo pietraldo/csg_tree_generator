@@ -19,7 +19,11 @@ namespace csg_tree_generator
 		}
 		private static void DrawLine(int x1, int y1, int x2, int y2, System.Drawing.Graphics g)
 		{
-			//g.DrawLine(System.Drawing.Pens.Blue, x1, y1, x2, y2);
+			x1 = (int)((x1) * camera.scale) + camera.x;
+			y1 = (int)((y1) * camera.scale) + camera.y;
+			x2 = (int)((x2) * camera.scale) + camera.x;
+			y2 = (int)((y2) * camera.scale) + camera.y;
+			g.DrawLine(System.Drawing.Pens.Blue, x1, y1, x2, y2);
 		}
 
 		public static void DrawNode(Node node, System.Drawing.Graphics g)
