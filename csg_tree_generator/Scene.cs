@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.Design;
 
 namespace csg_tree_generator
 {
@@ -52,6 +53,15 @@ namespace csg_tree_generator
 			trees.Add(root2);
 
 			draw= new Draw(camera);
+
+			Sphere sphere = new Sphere();
+			root2.right = sphere;
+			sphere.X = 300;
+			sphere.Y = 300;
+			sphere.parent = root2;
+			sphere.type = NodeType.Sphere;
+
+			
 		}
 
 		public void DrawTrees(System.Drawing.Graphics g)
@@ -78,6 +88,31 @@ namespace csg_tree_generator
 			}
 		}
 
+		public void AdjustTree(Node node)
+		{
+			if (node == null) return;
+			
+			if(node.parent==null)
+			{
+				AdjustTree(node.left);
+				AdjustTree(node.right);
+				return;
+			}
+
+			if (node == node.parent.left)
+			{ 
+				node.X = node.parent.X - Draw.distanceHorizontal;
+				node.Y = node.parent.Y + Draw.distanceVertical;
+			}
+			else if (node == node.parent.right)
+			{
+				node.X = node.parent.X + Draw.distanceHorizontal;
+				node.Y = node.parent.Y + Draw.distanceVertical;
+			}
+			AdjustTree(node.left);
+			AdjustTree(node.right);
+		}
+
 		public bool JoinTrees(Node node)
 		{
 			if(draggingTree == null) return false;
@@ -86,7 +121,7 @@ namespace csg_tree_generator
 			if(node.AddChild(draggingTree))
 			{
 				trees.Remove(draggingTree);
-				MoveWholeTree(draggingTree, 40, 40);
+				MoveWholeTree(draggingTree, 0, Draw.distanceVertical);
 				return true;
 			}
 			return false;

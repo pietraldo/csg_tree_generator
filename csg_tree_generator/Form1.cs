@@ -13,7 +13,11 @@ public enum MouseMode
 public enum EditingMode
 {
 	None,
-	RemoveNode
+	RemoveNode,
+	AdjustNode,
+	MakeUnionNode,
+	MakeIntersectionNode,
+	MakeDifferenceNode
 }
 
 public partial class mainWindow : Form
@@ -43,7 +47,7 @@ public partial class mainWindow : Form
 		e.Graphics.Clear(Color.White);
 
 		scene.DrawTrees(e.Graphics);
-		this.lblStatus.Text=editingMode.ToString();
+		this.lblStatus.Text = editingMode.ToString();
 	}
 
 	private void mainWindow_MouseMove(object sender, MouseEventArgs e)
@@ -118,11 +122,34 @@ public partial class mainWindow : Form
 
 			if (e.Button == MouseButtons.Right)
 			{
-				if(editingMode == EditingMode.RemoveNode)
+				if (editingMode == EditingMode.RemoveNode)
 				{
 					scene.DetachTree(node);
 					break;
 				}
+
+				if (editingMode == EditingMode.AdjustNode)
+				{
+					scene.AdjustTree(node);
+					break;
+				}
+
+				if (editingMode == EditingMode.MakeUnionNode)
+				{
+					node.type = NodeType.Union;
+					break;
+				}
+				else if (editingMode == EditingMode.MakeIntersectionNode)
+				{
+					node.type = NodeType.Intersection;
+					break;
+				}
+				else if (editingMode == EditingMode.MakeDifferenceNode)
+				{
+					node.type = NodeType.Difference;
+					break;
+				}
+
 				scene.draggingTree = node;
 				mouseMode = MouseMode.MoveTree;
 
@@ -146,15 +173,34 @@ public partial class mainWindow : Form
 
 	private void mainWindow_KeyPress(object sender, KeyPressEventArgs e)
 	{
-		if(e.KeyChar == 'd')
+		switch (e.KeyChar)
 		{
-			editingMode = EditingMode.RemoveNode;
-		}
-		else
-		{
-			editingMode=EditingMode.None;
+			case 'a':
+				editingMode = EditingMode.AdjustNode;
+				break;
+			case 'd':
+				editingMode = EditingMode.RemoveNode;
+				break;
+			case 'u':
+				editingMode = EditingMode.MakeUnionNode;
+				break;
+			case 'i':
+				editingMode = EditingMode.MakeIntersectionNode;
+				break;
+			case 's':
+				editingMode = EditingMode.MakeDifferenceNode;
+				break;
+			default:
+				editingMode = EditingMode.None;
+				break;
 		}
 		Invalidate();
+	}
+
+	private void btnCreatSphere_Click(object sender, EventArgs e)
+	{
+		CreateSphere createSphere = new CreateSphere();
+		createSphere.ShowDialog();
 	}
 }
 

@@ -6,12 +6,22 @@ using System.Threading.Tasks;
 
 namespace csg_tree_generator
 {
+	public enum NodeType
+	{
+		Union,
+		Intersection,
+		Difference,
+		Sphere,
+		Cube,
+		Cylinder
+	}
 	public class Node
 	{
 		public bool hidenChildren = false;
 		public Node? parent = null;
 		public Node? left = null;
 		public Node? right = null;
+		public NodeType type = NodeType.Union;
 
 		// drawing parameters
 		public int X { get; set; }
@@ -37,7 +47,7 @@ namespace csg_tree_generator
 
 		public Node? DetectNode(WorldCordinates wc)
 		{
-			if (X - Draw.circleRadius <wc.X  && X + Draw.circleRadius > wc.X &&
+			if (X - Draw.circleRadius < wc.X && X + Draw.circleRadius > wc.X &&
 								Y - Draw.circleRadius < wc.Y && Y + Draw.circleRadius > wc.Y)
 			{
 				return this;

@@ -29,17 +29,54 @@
 		private void InitializeComponent()
 		{
 			panel1 = new Panel();
+			btnCreateCube = new Button();
+			btnCreateCylinder = new Button();
+			btnCreatSphere = new Button();
 			lblStatus = new Label();
+			textBox1 = new TextBox();
+			panel1.SuspendLayout();
 			SuspendLayout();
 			// 
 			// panel1
 			// 
 			panel1.BackColor = Color.Cyan;
+			panel1.Controls.Add(textBox1);
+			panel1.Controls.Add(btnCreateCube);
+			panel1.Controls.Add(btnCreateCylinder);
+			panel1.Controls.Add(btnCreatSphere);
 			panel1.Dock = DockStyle.Right;
 			panel1.Location = new Point(600, 0);
 			panel1.Name = "panel1";
 			panel1.Size = new Size(200, 450);
 			panel1.TabIndex = 0;
+			// 
+			// btnCreateCube
+			// 
+			btnCreateCube.Location = new Point(35, 123);
+			btnCreateCube.Name = "btnCreateCube";
+			btnCreateCube.Size = new Size(103, 23);
+			btnCreateCube.TabIndex = 2;
+			btnCreateCube.Text = "Create Cube";
+			btnCreateCube.UseVisualStyleBackColor = true;
+			// 
+			// btnCreateCylinder
+			// 
+			btnCreateCylinder.Location = new Point(35, 94);
+			btnCreateCylinder.Name = "btnCreateCylinder";
+			btnCreateCylinder.Size = new Size(103, 23);
+			btnCreateCylinder.TabIndex = 1;
+			btnCreateCylinder.Text = "Create Cylinder";
+			btnCreateCylinder.UseVisualStyleBackColor = true;
+			// 
+			// btnCreatSphere
+			// 
+			btnCreatSphere.Location = new Point(35, 65);
+			btnCreatSphere.Name = "btnCreatSphere";
+			btnCreatSphere.Size = new Size(103, 23);
+			btnCreatSphere.TabIndex = 0;
+			btnCreatSphere.Text = "Create Sphere";
+			btnCreatSphere.UseVisualStyleBackColor = true;
+			btnCreatSphere.Click += btnCreatSphere_Click;
 			// 
 			// lblStatus
 			// 
@@ -49,6 +86,13 @@
 			lblStatus.Size = new Size(38, 15);
 			lblStatus.TabIndex = 1;
 			lblStatus.Text = "label1";
+			// 
+			// textBox1
+			// 
+			textBox1.Location = new Point(3, 26);
+			textBox1.Name = "textBox1";
+			textBox1.Size = new Size(194, 23);
+			textBox1.TabIndex = 3;
 			// 
 			// mainWindow
 			// 
@@ -64,6 +108,8 @@
 			MouseDown += mainWindow_MouseDown;
 			MouseMove += mainWindow_MouseMove;
 			MouseUp += mainWindow_MouseUp;
+			panel1.ResumeLayout(false);
+			panel1.PerformLayout();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -72,5 +118,9 @@
 
 		private Panel panel1;
 		private Label lblStatus;
+		private Button btnCreateCube;
+		private Button btnCreateCylinder;
+		private Button btnCreatSphere;
+		private TextBox textBox1;
 	}
 }
