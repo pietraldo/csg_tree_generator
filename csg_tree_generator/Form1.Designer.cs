@@ -29,18 +29,20 @@
 		private void InitializeComponent()
 		{
 			panel1 = new Panel();
+			btnSave = new Button();
+			txtEdit = new TextBox();
 			btnCreateCube = new Button();
 			btnCreateCylinder = new Button();
 			btnCreatSphere = new Button();
 			lblStatus = new Label();
-			textBox1 = new TextBox();
 			panel1.SuspendLayout();
 			SuspendLayout();
 			// 
 			// panel1
 			// 
 			panel1.BackColor = Color.Cyan;
-			panel1.Controls.Add(textBox1);
+			panel1.Controls.Add(btnSave);
+			panel1.Controls.Add(txtEdit);
 			panel1.Controls.Add(btnCreateCube);
 			panel1.Controls.Add(btnCreateCylinder);
 			panel1.Controls.Add(btnCreatSphere);
@@ -50,9 +52,26 @@
 			panel1.Size = new Size(200, 450);
 			panel1.TabIndex = 0;
 			// 
+			// btnSave
+			// 
+			btnSave.Location = new Point(51, 55);
+			btnSave.Name = "btnSave";
+			btnSave.Size = new Size(75, 23);
+			btnSave.TabIndex = 4;
+			btnSave.Text = "Save";
+			btnSave.UseVisualStyleBackColor = true;
+			btnSave.Click += btnSave_Click;
+			// 
+			// txtEdit
+			// 
+			txtEdit.Location = new Point(3, 26);
+			txtEdit.Name = "txtEdit";
+			txtEdit.Size = new Size(194, 23);
+			txtEdit.TabIndex = 3;
+			// 
 			// btnCreateCube
 			// 
-			btnCreateCube.Location = new Point(35, 123);
+			btnCreateCube.Location = new Point(35, 153);
 			btnCreateCube.Name = "btnCreateCube";
 			btnCreateCube.Size = new Size(103, 23);
 			btnCreateCube.TabIndex = 2;
@@ -61,7 +80,7 @@
 			// 
 			// btnCreateCylinder
 			// 
-			btnCreateCylinder.Location = new Point(35, 94);
+			btnCreateCylinder.Location = new Point(35, 124);
 			btnCreateCylinder.Name = "btnCreateCylinder";
 			btnCreateCylinder.Size = new Size(103, 23);
 			btnCreateCylinder.TabIndex = 1;
@@ -70,7 +89,7 @@
 			// 
 			// btnCreatSphere
 			// 
-			btnCreatSphere.Location = new Point(35, 65);
+			btnCreatSphere.Location = new Point(35, 95);
 			btnCreatSphere.Name = "btnCreatSphere";
 			btnCreatSphere.Size = new Size(103, 23);
 			btnCreatSphere.TabIndex = 0;
@@ -87,13 +106,6 @@
 			lblStatus.TabIndex = 1;
 			lblStatus.Text = "label1";
 			// 
-			// textBox1
-			// 
-			textBox1.Location = new Point(3, 26);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(194, 23);
-			textBox1.TabIndex = 3;
-			// 
 			// mainWindow
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -101,6 +113,7 @@
 			ClientSize = new Size(800, 450);
 			Controls.Add(lblStatus);
 			Controls.Add(panel1);
+			KeyPreview = true;
 			Name = "mainWindow";
 			Text = "Form1";
 			Paint += mainWindow_Paint;
@@ -121,6 +134,7 @@
 		private Button btnCreateCube;
 		private Button btnCreateCylinder;
 		private Button btnCreatSphere;
-		private TextBox textBox1;
+		private TextBox txtEdit;
+		private Button btnSave;
 	}
 }

@@ -17,7 +17,8 @@ public enum EditingMode
 	AdjustNode,
 	MakeUnionNode,
 	MakeIntersectionNode,
-	MakeDifferenceNode
+	MakeDifferenceNode,
+	EditShape
 }
 
 public partial class mainWindow : Form
@@ -47,7 +48,7 @@ public partial class mainWindow : Form
 		e.Graphics.Clear(Color.White);
 
 		scene.DrawTrees(e.Graphics);
-		this.lblStatus.Text = editingMode.ToString();
+		lblStatus.Text = editingMode.ToString();
 	}
 
 	private void mainWindow_MouseMove(object sender, MouseEventArgs e)
@@ -56,7 +57,7 @@ public partial class mainWindow : Form
 		{
 			case MouseMode.MoveNode:
 				CanvasCordinates canvasCordinates = new CanvasCordinates(e.X, e.Y);
-				scene.draggingNode.WorldCordinates = canvasCordinates.WorldCordinates(scene.camera);
+				scene.SelectedNode.WorldCordinates = canvasCordinates.WorldCordinates(scene.camera);
 				break;
 
 			case MouseMode.MoveScene:
@@ -69,7 +70,7 @@ public partial class mainWindow : Form
 				WorldCordinates worldCortinates2 = lastMousePoint.WorldCordinates(scene.camera);
 				int dx = worldCordinates.X - worldCortinates2.X;
 				int dy = worldCordinates.Y - worldCortinates2.Y;
-				scene.MoveWholeTree(scene.draggingTree, dx, dy);
+				scene.MoveWholeTree(scene.SelectedNode, dx, dy);
 				break;
 		}
 		lastMousePoint = new CanvasCordinates(e.X, e.Y);
@@ -99,7 +100,7 @@ public partial class mainWindow : Form
 			foreach (Node root in scene.trees)
 			{
 				Node? node = root.DetectNode(worldCordinates);
-				if (node == null || scene.draggingTree == node) continue;
+				if (node == null || scene.SelectedNode == node) continue;
 
 				if (scene.JoinTrees(node)) break;
 			}
@@ -114,57 +115,54 @@ public partial class mainWindow : Form
 	{
 
 		WorldCordinates worldCordinates = new CanvasCordinates(e.X, e.Y).WorldCordinates(scene.camera);
-		bool isDragingNode = false;
-		foreach (Node root in scene.trees)
+		bool changedMode = false;
+		Node? node = scene.GetNode(worldCordinates);
+		if (node != null)
 		{
-			Node? node = root.DetectNode(worldCordinates);
-			if (node == null) continue;
-
 			if (e.Button == MouseButtons.Right)
 			{
-				if (editingMode == EditingMode.RemoveNode)
+
+				switch(editingMode)
 				{
-					scene.DetachTree(node);
-					break;
+					case EditingMode.RemoveNode:
+						scene.DetachTree(node);
+						break;
+					case EditingMode.AdjustNode:
+						scene.AdjustTree(node);
+						break;
+					case EditingMode.MakeUnionNode:
+						node.type = NodeType.Union;
+						break;
+					case EditingMode.MakeIntersectionNode:
+						node.type = NodeType.Intersection;
+						break;
+					case EditingMode.MakeDifferenceNode:
+						node.type = NodeType.Difference;
+						break;
+					case EditingMode.EditShape:
+						if (node.type == NodeType.Sphere)
+						{
+							Sphere sphere = (Sphere)node;
+							txtEdit.Text = sphere.ToString();
+						}
+						break;
+					default:
+						mouseMode = MouseMode.MoveTree;
+						changedMode = true;
+						break;
 				}
 
-				if (editingMode == EditingMode.AdjustNode)
-				{
-					scene.AdjustTree(node);
-					break;
-				}
-
-				if (editingMode == EditingMode.MakeUnionNode)
-				{
-					node.type = NodeType.Union;
-					break;
-				}
-				else if (editingMode == EditingMode.MakeIntersectionNode)
-				{
-					node.type = NodeType.Intersection;
-					break;
-				}
-				else if (editingMode == EditingMode.MakeDifferenceNode)
-				{
-					node.type = NodeType.Difference;
-					break;
-				}
-
-				scene.draggingTree = node;
-				mouseMode = MouseMode.MoveTree;
-
+				scene.SelectedNode = node;
 			}
 			else
 			{
-				scene.draggingNode = node;
+				scene.SelectedNode = node;
 				mouseMode = MouseMode.MoveNode;
+				changedMode=true;
 			}
-			isDragingNode = true;
-			break;
 		}
 
-
-		if (mouseMode == MouseMode.None)
+		if (mouseMode == MouseMode.None && !changedMode)
 		{
 			lastMousePoint = new CanvasCordinates(e.X, e.Y);
 			mouseMode = MouseMode.MoveScene;
@@ -173,6 +171,7 @@ public partial class mainWindow : Form
 
 	private void mainWindow_KeyPress(object sender, KeyPressEventArgs e)
 	{
+
 		switch (e.KeyChar)
 		{
 			case 'a':
@@ -190,6 +189,9 @@ public partial class mainWindow : Form
 			case 's':
 				editingMode = EditingMode.MakeDifferenceNode;
 				break;
+			case 'e':
+				editingMode = EditingMode.EditShape;
+				break;
 			default:
 				editingMode = EditingMode.None;
 				break;
@@ -199,8 +201,26 @@ public partial class mainWindow : Form
 
 	private void btnCreatSphere_Click(object sender, EventArgs e)
 	{
-		CreateSphere createSphere = new CreateSphere();
-		createSphere.ShowDialog();
+		Sphere sphere = new Sphere();
+		sphere.X = 100;
+		sphere.Y = 100;
+		sphere.type = NodeType.Sphere;
+		sphere.Radius = 3.0f;
+		sphere.Red = 255;
+		sphere.Green = 0;
+		sphere.Blue = 0;
+		sphere.PosX = 0;
+		sphere.PosY = 0;
+		sphere.PosZ = 0;
+
+		scene.trees.Add(sphere);
+		Invalidate();
+	}
+
+	private void btnSave_Click(object sender, EventArgs e)
+	{
+		if (scene.SelectedNode.EditShape(txtEdit.Text))
+			txtEdit.Text = "";
 	}
 }
 

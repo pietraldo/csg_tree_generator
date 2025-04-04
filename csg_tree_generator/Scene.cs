@@ -9,8 +9,7 @@ namespace csg_tree_generator
 {
 	public class Scene
 	{
-		public Node? draggingNode = null;
-		public Node? draggingTree = null;
+		public Node? SelectedNode = null;
 
 		public List<Node> trees = new List<Node>();
 		public Camera camera = new Camera();
@@ -52,7 +51,7 @@ namespace csg_tree_generator
 			trees.Add(root);
 			trees.Add(root2);
 
-			draw= new Draw(camera);
+			draw = new Draw(camera);
 
 			Sphere sphere = new Sphere();
 			root2.right = sphere;
@@ -61,14 +60,14 @@ namespace csg_tree_generator
 			sphere.parent = root2;
 			sphere.type = NodeType.Sphere;
 
-			
+
 		}
 
 		public void DrawTrees(System.Drawing.Graphics g)
 		{
 			foreach (Node root in trees)
 			{
-				draw.DrawNode(root, g);
+				draw.DrawNode(root, g, SelectedNode);
 			}
 		}
 
@@ -91,8 +90,8 @@ namespace csg_tree_generator
 		public void AdjustTree(Node node)
 		{
 			if (node == null) return;
-			
-			if(node.parent==null)
+
+			if (node.parent == null)
 			{
 				AdjustTree(node.left);
 				AdjustTree(node.right);
@@ -100,7 +99,7 @@ namespace csg_tree_generator
 			}
 
 			if (node == node.parent.left)
-			{ 
+			{
 				node.X = node.parent.X - Draw.distanceHorizontal;
 				node.Y = node.parent.Y + Draw.distanceVertical;
 			}
@@ -115,13 +114,13 @@ namespace csg_tree_generator
 
 		public bool JoinTrees(Node node)
 		{
-			if(draggingTree == null) return false;
-			if(!trees.Contains(draggingTree)) return false;
+			if (SelectedNode == null) return false;
+			if (!trees.Contains(SelectedNode)) return false;
 
-			if(node.AddChild(draggingTree))
+			if (node.AddChild(SelectedNode))
 			{
-				trees.Remove(draggingTree);
-				MoveWholeTree(draggingTree, 0, Draw.distanceVertical);
+				trees.Remove(SelectedNode);
+				MoveWholeTree(SelectedNode, 0, Draw.distanceVertical);
 				return true;
 			}
 			return false;
@@ -129,13 +128,13 @@ namespace csg_tree_generator
 
 		public bool DetachTree(Node node)
 		{
-			if(node==null) return false;
-			if (node.parent==null) return false;
-			if(node.parent.left== node)
+			if (node == null) return false;
+			if (node.parent == null) return false;
+			if (node.parent.left == node)
 			{
 				node.parent.left = null;
 			}
-			else if(node.parent.right==node)
+			else if (node.parent.right == node)
 			{
 				node.parent.right = null;
 			}
@@ -146,6 +145,16 @@ namespace csg_tree_generator
 			node.parent = null;
 			trees.Add(node);
 			return true;
+		}
+
+		public Node? GetNode(WorldCordinates wc)
+		{
+			foreach (Node root in trees)
+			{
+				Node? node = root.DetectNode(wc);
+				if (node != null) return node;
+			}
+			return null;
 		}
 
 	}

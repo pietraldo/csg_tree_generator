@@ -13,6 +13,7 @@ namespace csg_tree_generator
 		public static int distanceHorizontal = 50;
 		public Camera camera;
 
+
 		public Draw(Camera camera)
 		{
 			this.camera = camera;
@@ -24,7 +25,7 @@ namespace csg_tree_generator
 			g.DrawLine(System.Drawing.Pens.LightBlue, cc1.X, cc1.Y, cc2.X, cc2.Y);
 		}
 
-		public void DrawNode(Node node, System.Drawing.Graphics g)
+		public void DrawNode(Node node, System.Drawing.Graphics g, Node selected)
 		{
 			if (node == null) return;
 
@@ -32,19 +33,23 @@ namespace csg_tree_generator
 			CanvasCordinates cc = node.CanvasCordinates(camera);
 			g.FillEllipse(System.Drawing.Brushes.LightBlue, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
 
+			if(node==selected)
+			{
+				g.DrawEllipse(System.Drawing.Pens.Red, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
+			}
 
 			
 
 			if (node.left != null)
 			{
 				DrawLine(node.CanvasCordinates(camera), node.left.CanvasCordinates(camera), g);
-				DrawNode(node.left, g);
+				DrawNode(node.left, g, selected);
 			}
 				
 			if (node.right != null)
 			{
 				DrawLine(node.CanvasCordinates(camera), node.right.CanvasCordinates(camera), g);
-				DrawNode(node.right, g);
+				DrawNode(node.right, g, selected);
 			}
 
 
