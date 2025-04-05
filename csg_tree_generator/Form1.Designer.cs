@@ -35,7 +35,13 @@
 			btnCreateCylinder = new Button();
 			btnCreatSphere = new Button();
 			lblStatus = new Label();
+			menuStrip1 = new MenuStrip();
+			fileToolStripMenuItem = new ToolStripMenuItem();
+			exportToolStripMenuItem = new ToolStripMenuItem();
+			selectedTreeToolStripMenuItem = new ToolStripMenuItem();
+			importToolStripMenuItem = new ToolStripMenuItem();
 			panel1.SuspendLayout();
+			menuStrip1.SuspendLayout();
 			SuspendLayout();
 			// 
 			// panel1
@@ -47,9 +53,9 @@
 			panel1.Controls.Add(btnCreateCylinder);
 			panel1.Controls.Add(btnCreatSphere);
 			panel1.Dock = DockStyle.Right;
-			panel1.Location = new Point(600, 0);
+			panel1.Location = new Point(600, 24);
 			panel1.Name = "panel1";
-			panel1.Size = new Size(200, 450);
+			panel1.Size = new Size(200, 426);
 			panel1.TabIndex = 0;
 			// 
 			// btnSave
@@ -102,11 +108,47 @@
 			// lblStatus
 			// 
 			lblStatus.AutoSize = true;
-			lblStatus.Location = new Point(2, 9);
+			lblStatus.Location = new Point(0, 24);
 			lblStatus.Name = "lblStatus";
 			lblStatus.Size = new Size(38, 15);
 			lblStatus.TabIndex = 1;
 			lblStatus.Text = "label1";
+			// 
+			// menuStrip1
+			// 
+			menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+			menuStrip1.Location = new Point(0, 0);
+			menuStrip1.Name = "menuStrip1";
+			menuStrip1.Size = new Size(800, 24);
+			menuStrip1.TabIndex = 2;
+			menuStrip1.Text = "menuStrip1";
+			// 
+			// fileToolStripMenuItem
+			// 
+			fileToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportToolStripMenuItem, importToolStripMenuItem });
+			fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+			fileToolStripMenuItem.Size = new Size(37, 20);
+			fileToolStripMenuItem.Text = "File";
+			// 
+			// exportToolStripMenuItem
+			// 
+			exportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { selectedTreeToolStripMenuItem });
+			exportToolStripMenuItem.Name = "exportToolStripMenuItem";
+			exportToolStripMenuItem.Size = new Size(180, 22);
+			exportToolStripMenuItem.Text = "Export";
+			// 
+			// selectedTreeToolStripMenuItem
+			// 
+			selectedTreeToolStripMenuItem.Name = "selectedTreeToolStripMenuItem";
+			selectedTreeToolStripMenuItem.Size = new Size(180, 22);
+			selectedTreeToolStripMenuItem.Text = "Selected tree";
+			selectedTreeToolStripMenuItem.Click += selectedTreeToolStripMenuItem_Click;
+			// 
+			// importToolStripMenuItem
+			// 
+			importToolStripMenuItem.Name = "importToolStripMenuItem";
+			importToolStripMenuItem.Size = new Size(180, 22);
+			importToolStripMenuItem.Text = "Import";
 			// 
 			// mainWindow
 			// 
@@ -115,7 +157,9 @@
 			ClientSize = new Size(800, 450);
 			Controls.Add(lblStatus);
 			Controls.Add(panel1);
+			Controls.Add(menuStrip1);
 			KeyPreview = true;
+			MainMenuStrip = menuStrip1;
 			Name = "mainWindow";
 			Text = "Form1";
 			Paint += mainWindow_Paint;
@@ -125,6 +169,8 @@
 			MouseUp += mainWindow_MouseUp;
 			panel1.ResumeLayout(false);
 			panel1.PerformLayout();
+			menuStrip1.ResumeLayout(false);
+			menuStrip1.PerformLayout();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -138,5 +184,10 @@
 		private Button btnCreatSphere;
 		private TextBox txtEdit;
 		private Button btnSave;
+		private MenuStrip menuStrip1;
+		private ToolStripMenuItem fileToolStripMenuItem;
+		private ToolStripMenuItem exportToolStripMenuItem;
+		private ToolStripMenuItem importToolStripMenuItem;
+		private ToolStripMenuItem selectedTreeToolStripMenuItem;
 	}
 }

@@ -250,7 +250,7 @@ public partial class mainWindow : Form
 		cylinder.RotationX = 0;
 		cylinder.RotationY = 1;
 		cylinder.RotationZ = 0;
-		
+
 		scene.trees.Add(cylinder);
 		Invalidate();
 	}
@@ -270,6 +270,18 @@ public partial class mainWindow : Form
 		cube.EdgeLength = 5.0f;
 		scene.trees.Add(cube);
 		Invalidate();
+	}
+
+	private void selectedTreeToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		try
+		{
+			scene.ExportTree(scene.SelectedNode);
+		}
+		catch(ExportException ex)
+		{
+			MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
 	}
 }
 

@@ -22,18 +22,18 @@ namespace csg_tree_generator
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.AppendLine(PosX.ToString());
-			sb.AppendLine(" ");
-			sb.AppendLine(PosY.ToString());
-			sb.AppendLine(" ");
-			sb.AppendLine(PosZ.ToString());
-			sb.AppendLine(" ");
+			sb.Append(PosX.ToString());
+			sb.Append(" ");
+			sb.Append(PosY.ToString());
+			sb.Append(" ");
+			sb.Append(PosZ.ToString());
+			sb.Append(" ");
 			sb.Append(Red.ToString("X"));
-			sb.AppendLine(" ");
+			sb.Append(" ");
 			sb.Append(Green.ToString("X"));
-			sb.AppendLine(" ");
+			sb.Append(" ");
 			sb.Append(Blue.ToString("X"));
-			sb.AppendLine(" ");
+			sb.Append(" ");
 			sb.Append(EdgeLength.ToString());
 			return sb.ToString();
 		}

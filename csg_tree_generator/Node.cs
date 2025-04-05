@@ -77,6 +77,11 @@ namespace csg_tree_generator
 			return true;
 		}
 
+		public override string ToString()
+		{
+			return type.ToString();
+		}
+
 		public virtual bool EditShape(string editString)
 		{
 			return false;

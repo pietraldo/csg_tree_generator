@@ -157,5 +157,27 @@ namespace csg_tree_generator
 			return null;
 		}
 
+		internal void ExportTree(Node? selectedNode)
+		{
+			if(selectedNode == null) 
+				throw new ExportException("No tree selected");
+
+			StringBuilder sb = new StringBuilder();
+			BuildExportString(0, selectedNode, sb);
+			string exportString = sb.ToString();
+
+			// Save to file
+			File.WriteAllText("C:\\Users\\pietr\\Desktop\\export.txt",  exportString );
+			return;
+		}
+
+		public void BuildExportString(int indentLevel, Node node, StringBuilder sb)
+		{
+			if(node == null) return;
+			sb.Append(new string('\t', indentLevel));
+			sb.AppendLine(node.ToString());
+			BuildExportString(indentLevel + 1, node.left, sb);
+			BuildExportString(indentLevel + 1, node.right, sb);
+		}
 	}
 }
