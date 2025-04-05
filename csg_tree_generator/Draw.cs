@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,14 +13,27 @@ namespace csg_tree_generator
 		public static int distanceVertical = 50;
 		public static int distanceHorizontal = 50;
 		public Camera camera;
-
+		
 
 		public Draw(Camera camera)
 		{
 			this.camera = camera;
 		}
 
-		
+		private void DrawCylinder(Graphics g, CanvasCordinates cc)
+		{
+			g.FillRectangle(System.Drawing.Brushes.Beige, cc.X - circleRadius*camera.scale, cc.Y - circleRadius*camera.scale, camera.scale*circleRadius * 2, camera.scale*circleRadius * 2);
+			g.FillEllipse(System.Drawing.Brushes.Beige, cc.X - circleRadius * camera.scale, cc.Y-circleRadius*camera.scale*1.3f, camera.scale*circleRadius*2, camera.scale *circleRadius);
+			g.DrawEllipse(System.Drawing.Pens.LightBlue, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale * 1.3f, camera.scale * circleRadius * 2, camera.scale * circleRadius * 1.3f);
+			g.FillEllipse(System.Drawing.Brushes.Beige, cc.X - circleRadius * camera.scale, cc.Y+circleRadius*camera.scale*0.7f, camera.scale*circleRadius*2, camera.scale *circleRadius);
+			g.DrawEllipse(System.Drawing.Pens.LightBlue, cc.X - circleRadius * camera.scale, cc.Y + circleRadius * camera.scale * 0.7f, camera.scale * circleRadius * 2, camera.scale * circleRadius * 1.3f);
+		}
+
+		private void DrawCube(Graphics g, CanvasCordinates cc)
+		{
+			g.FillRectangle(System.Drawing.Brushes.Orange, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, camera.scale * circleRadius * 2, camera.scale * circleRadius * 2);
+		}
+
 		private void DrawLine(CanvasCordinates cc1, CanvasCordinates cc2, System.Drawing.Graphics g)
 		{
 			g.DrawLine(System.Drawing.Pens.LightBlue, cc1.X, cc1.Y, cc2.X, cc2.Y);
@@ -31,21 +45,39 @@ namespace csg_tree_generator
 
 			// Draw the current node
 			CanvasCordinates cc = node.CanvasCordinates(camera);
-			g.FillEllipse(System.Drawing.Brushes.LightBlue, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
 
-			if(node==selected)
+			if(node.type == NodeType.Cylinder)
+			{
+				DrawCylinder(g,cc);
+			}
+			else if (node.type == NodeType.Cube)
+			{
+				DrawCube(g, cc);
+			}
+			else if (node.type == NodeType.Sphere)
+			{
+				g.FillEllipse(System.Drawing.Brushes.Violet, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
+			}
+			else
+			{
+				g.FillEllipse(System.Drawing.Brushes.LightBlue, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
+			}
+
+
+			if (node == selected)
 			{
 				g.DrawEllipse(System.Drawing.Pens.Red, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
 			}
 
-			
+
+
 
 			if (node.left != null)
 			{
 				DrawLine(node.CanvasCordinates(camera), node.left.CanvasCordinates(camera), g);
 				DrawNode(node.left, g, selected);
 			}
-				
+
 			if (node.right != null)
 			{
 				DrawLine(node.CanvasCordinates(camera), node.right.CanvasCordinates(camera), g);
