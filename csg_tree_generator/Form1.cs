@@ -31,6 +31,8 @@ public partial class mainWindow : Form
 	EditingMode editingMode = EditingMode.None;
 
 	string csgProgramPath = "";
+	string saving_tree_path = "tree.txt";
+	string camera_path = "camera.ini";
 	public mainWindow()
 	{
 		InitializeComponent();
@@ -315,9 +317,6 @@ public partial class mainWindow : Form
 
 	private void btnResult_Click(object sender, EventArgs e)
 	{
-		string saving_path = "tree.txt";
-		string camera_path = "camera.ini";
-
 		if (csgProgramPath == "" && SelectCsgViewerProgramPath() == string.Empty)
 		{
 			MessageBox.Show("No CSG program selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -326,7 +325,7 @@ public partial class mainWindow : Form
 
 		try
 		{
-			scene.ExportTree(scene.SelectedNode, saving_path);
+			scene.ExportTree(scene.SelectedNode, saving_tree_path);
 		}
 		catch (ExportException ex)
 		{
@@ -339,7 +338,7 @@ public partial class mainWindow : Form
 			var processStartInfo = new ProcessStartInfo
 			{
 				FileName = csgProgramPath,
-				Arguments = $"\"{saving_path}\" \"{camera_path}\"",
+				Arguments = $"\"{saving_tree_path}\" \"{camera_path}\"",
 				UseShellExecute = false,
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
