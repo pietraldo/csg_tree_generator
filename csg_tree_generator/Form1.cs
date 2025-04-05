@@ -29,9 +29,10 @@ public partial class mainWindow : Form
 	Scene scene;
 	MouseMode mouseMode = MouseMode.None;
 	EditingMode editingMode = EditingMode.None;
+
+	string csgProgramPath = "";
 	public mainWindow()
 	{
-
 		InitializeComponent();
 
 		this.SetStyle(
@@ -41,8 +42,12 @@ public partial class mainWindow : Form
 		   true);
 
 		scene = new Scene();
+		LoadSettings();
 	}
-
+	private void LoadSettings()
+	{
+		csgProgramPath = Properties.Settings.Default.Csg_viewer_path;
+	}
 
 	private void mainWindow_Paint(object sender, PaintEventArgs e)
 	{
@@ -277,7 +282,15 @@ public partial class mainWindow : Form
 	{
 		try
 		{
-			scene.ExportTree(scene.SelectedNode, "C:\\Users\\pietr\\Desktop\\export.txt");
+			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+			{
+				saveFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+				saveFileDialog.Title = "Save Tree to File";
+				if (saveFileDialog.ShowDialog() == DialogResult.OK)
+				{
+					scene.ExportTree(scene.SelectedNode, saveFileDialog.FileName);
+				}
+			}
 		}
 		catch (ExportException ex)
 		{
@@ -285,11 +298,31 @@ public partial class mainWindow : Form
 		}
 	}
 
+	private string SelectCsgViewerProgramPath()
+	{
+		using (OpenFileDialog openFileDialog = new OpenFileDialog())
+		{
+			openFileDialog.Filter = "Executable files (*.exe)|*.exe|All files (*.*)|*.*";
+			openFileDialog.Title = "Select CSG Program";
+			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				csgProgramPath = openFileDialog.FileName;
+				return csgProgramPath;
+			}
+		}
+		return string.Empty;
+	}
+
 	private void btnResult_Click(object sender, EventArgs e)
 	{
 		string saving_path = "tree.txt";
-		string program_path = "C:/Users/pietr/Documents/studia/karty graficzne/comparision/CUDA-CSG-Tree-Raycasting/x64/Release/CSGRayCasting.exe";
 		string camera_path = "camera.ini";
+
+		if (csgProgramPath == "" && SelectCsgViewerProgramPath() == string.Empty)
+		{
+			MessageBox.Show("No CSG program selected", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			return;
+		}
 
 		try
 		{
@@ -305,7 +338,7 @@ public partial class mainWindow : Form
 		{
 			var processStartInfo = new ProcessStartInfo
 			{
-				FileName = program_path,
+				FileName = csgProgramPath,
 				Arguments = $"\"{saving_path}\" \"{camera_path}\"",
 				UseShellExecute = false,
 				RedirectStandardOutput = true,
@@ -336,6 +369,18 @@ public partial class mainWindow : Form
 		{
 			MessageBox.Show(ex.Message, "Failed to start external program", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
+	}
+
+	private void mainWindow_FormClosed(object sender, FormClosedEventArgs e)
+	{
+		//Saving settings
+		Properties.Settings.Default.Csg_viewer_path = csgProgramPath;
+		Properties.Settings.Default.Save();
+	}
+
+	private void selectToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		SelectCsgViewerProgramPath();
 	}
 }
 

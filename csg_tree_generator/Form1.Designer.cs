@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			panel1 = new Panel();
+			btnResult = new Button();
 			btnSave = new Button();
 			txtEdit = new TextBox();
 			btnCreateCube = new Button();
@@ -40,7 +41,8 @@
 			exportToolStripMenuItem = new ToolStripMenuItem();
 			selectedTreeToolStripMenuItem = new ToolStripMenuItem();
 			importToolStripMenuItem = new ToolStripMenuItem();
-			btnResult = new Button();
+			csgProgramViewerToolStripMenuItem = new ToolStripMenuItem();
+			selectToolStripMenuItem = new ToolStripMenuItem();
 			panel1.SuspendLayout();
 			menuStrip1.SuspendLayout();
 			SuspendLayout();
@@ -59,6 +61,16 @@
 			panel1.Name = "panel1";
 			panel1.Size = new Size(200, 426);
 			panel1.TabIndex = 0;
+			// 
+			// btnResult
+			// 
+			btnResult.Location = new Point(51, 182);
+			btnResult.Name = "btnResult";
+			btnResult.Size = new Size(75, 23);
+			btnResult.TabIndex = 5;
+			btnResult.Text = "See Result";
+			btnResult.UseVisualStyleBackColor = true;
+			btnResult.Click += btnResult_Click;
 			// 
 			// btnSave
 			// 
@@ -118,7 +130,7 @@
 			// 
 			// menuStrip1
 			// 
-			menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem });
+			menuStrip1.Items.AddRange(new ToolStripItem[] { fileToolStripMenuItem, csgProgramViewerToolStripMenuItem });
 			menuStrip1.Location = new Point(0, 0);
 			menuStrip1.Name = "menuStrip1";
 			menuStrip1.Size = new Size(800, 24);
@@ -142,7 +154,7 @@
 			// selectedTreeToolStripMenuItem
 			// 
 			selectedTreeToolStripMenuItem.Name = "selectedTreeToolStripMenuItem";
-			selectedTreeToolStripMenuItem.Size = new Size(180, 22);
+			selectedTreeToolStripMenuItem.Size = new Size(141, 22);
 			selectedTreeToolStripMenuItem.Text = "Selected tree";
 			selectedTreeToolStripMenuItem.Click += selectedTreeToolStripMenuItem_Click;
 			// 
@@ -152,15 +164,19 @@
 			importToolStripMenuItem.Size = new Size(180, 22);
 			importToolStripMenuItem.Text = "Import";
 			// 
-			// btnResult
+			// csgProgramViewerToolStripMenuItem
 			// 
-			btnResult.Location = new Point(51, 182);
-			btnResult.Name = "btnResult";
-			btnResult.Size = new Size(75, 23);
-			btnResult.TabIndex = 5;
-			btnResult.Text = "See Result";
-			btnResult.UseVisualStyleBackColor = true;
-			btnResult.Click += btnResult_Click;
+			csgProgramViewerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { selectToolStripMenuItem });
+			csgProgramViewerToolStripMenuItem.Name = "csgProgramViewerToolStripMenuItem";
+			csgProgramViewerToolStripMenuItem.Size = new Size(125, 20);
+			csgProgramViewerToolStripMenuItem.Text = "Csg program viewer";
+			// 
+			// selectToolStripMenuItem
+			// 
+			selectToolStripMenuItem.Name = "selectToolStripMenuItem";
+			selectToolStripMenuItem.Size = new Size(180, 22);
+			selectToolStripMenuItem.Text = "Select";
+			selectToolStripMenuItem.Click += selectToolStripMenuItem_Click;
 			// 
 			// mainWindow
 			// 
@@ -174,6 +190,7 @@
 			MainMenuStrip = menuStrip1;
 			Name = "mainWindow";
 			Text = "Form1";
+			FormClosed += mainWindow_FormClosed;
 			Paint += mainWindow_Paint;
 			KeyPress += mainWindow_KeyPress;
 			MouseDown += mainWindow_MouseDown;
@@ -202,5 +219,7 @@
 		private ToolStripMenuItem importToolStripMenuItem;
 		private ToolStripMenuItem selectedTreeToolStripMenuItem;
 		private Button btnResult;
+		private ToolStripMenuItem csgProgramViewerToolStripMenuItem;
+		private ToolStripMenuItem selectToolStripMenuItem;
 	}
 }
