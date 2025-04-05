@@ -197,6 +197,32 @@ namespace csg_tree_generator
 			}
 		}
 
+		public Node? CopyTree(Node? node, Node? parent=null)
+		{
+			if (node == null) return null;
+            
+            Node newNode = node.Clone();
+			if(parent == null)
+			{
+				newNode.X -= Draw.circleRadius*2;
+				trees.Add(newNode);
+			}
+
+			if (node.left != null)
+			{
+				newNode.left = CopyTree(node.left, newNode);
+				if (newNode.left != null)
+					newNode.left.parent = newNode;
+			}
+			if (node.right != null)
+			{
+				newNode.right = CopyTree(node.right, newNode);
+				if (newNode.right != null)
+					newNode.right.parent = newNode;
+			}
+			return newNode;
+		}
+
 		public void ImportTree(string file_name)
 		{
 			Dictionary<string, INodeFactory> factories = new Dictionary<string, INodeFactory>

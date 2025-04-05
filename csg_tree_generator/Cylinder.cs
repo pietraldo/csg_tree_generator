@@ -25,6 +25,27 @@ namespace csg_tree_generator
 		public float RotationY { get; set; }
 		public float RotationZ { get; set; }
 
+		public override Node Clone()
+		{
+			Cylinder cylinder = new Cylinder();
+			cylinder.PosX = PosX;
+			cylinder.PosY = PosY;
+			cylinder.PosZ = PosZ;
+			cylinder.Red = Red;
+			cylinder.Green = Green;
+			cylinder.Blue = Blue;
+			cylinder.Radius = Radius;
+			cylinder.Height = Height;
+			cylinder.RotationX = RotationX;
+			cylinder.RotationY = RotationY;
+			cylinder.RotationZ = RotationZ;
+			cylinder.type = type;
+			cylinder.hidenChildren = hidenChildren;
+			cylinder.X = X;
+			cylinder.Y = Y;
+			return cylinder;
+		}
+
 		public override string ToString(bool withName)
 		{
 			return withName ? "Cylinder " + ToString() : ToString();

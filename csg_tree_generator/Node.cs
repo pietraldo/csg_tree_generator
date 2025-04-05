@@ -40,6 +40,15 @@ namespace csg_tree_generator
 			}
 		}
 
+		public virtual Node Clone()
+		{
+			Node node = new Node();
+			node.X = X;
+			node.Y = Y;
+			node.type = type;
+			node.hidenChildren = hidenChildren;
+			return node;
+		}
 		public CanvasCordinates CanvasCordinates(Camera camera)
 		{
 			return WorldCordinates.CanvasCordinates(camera);

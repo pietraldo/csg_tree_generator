@@ -20,7 +20,8 @@ public enum EditingMode
 	MakeIntersectionNode,
 	MakeDifferenceNode,
 	EditShape,
-	DeleteTree
+	DeleteTree,
+	CopyTree
 }
 
 public partial class mainWindow : Form
@@ -128,9 +129,9 @@ public partial class mainWindow : Form
 		Node? node = scene.GetNode(worldCordinates);
 		if (node != null)
 		{
+			scene.SelectedNode = node;
 			if (e.Button == MouseButtons.Right)
 			{
-
 				switch (editingMode)
 				{
 					case EditingMode.RemoveNode:
@@ -168,17 +169,20 @@ public partial class mainWindow : Form
 					case EditingMode.DeleteTree:
 						scene.DeleteTree(node);
 						break;
+					case EditingMode.CopyTree:
+						scene.CopyTree(scene.SelectedNode);
+						break;
 					default:
 						mouseMode = MouseMode.MoveTree;
 						changedMode = true;
 						break;
 				}
 
-				scene.SelectedNode = node;
+				editingMode = EditingMode.None;
+
 			}
 			else
 			{
-				scene.SelectedNode = node;
 				mouseMode = MouseMode.MoveNode;
 				changedMode = true;
 			}
@@ -189,6 +193,7 @@ public partial class mainWindow : Form
 			lastMousePoint = new CanvasCordinates(e.X, e.Y);
 			mouseMode = MouseMode.MoveScene;
 		}
+		Invalidate();
 	}
 
 	private void mainWindow_KeyPress(object sender, KeyPressEventArgs e)
@@ -216,6 +221,9 @@ public partial class mainWindow : Form
 				break;
 			case 'd':
 				editingMode = EditingMode.DeleteTree;
+				break;
+			case 'c':
+				editingMode = EditingMode.CopyTree;
 				break;
 			default:
 				editingMode = EditingMode.None;

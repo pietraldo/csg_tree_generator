@@ -40,6 +40,24 @@ namespace csg_tree_generator
 			sb.Append(Radius.ToString());
 			return sb.ToString();
 		}
+		public override Node Clone()
+		{
+			Sphere sphere = new Sphere();
+			sphere.PosX = PosX;
+			sphere.PosY = PosY;
+			sphere.PosZ = PosZ;
+			sphere.Red = Red;
+			sphere.Green = Green;
+			sphere.Blue = Blue;
+			sphere.Radius = Radius;
+			sphere.type = type;
+			sphere.hidenChildren = hidenChildren;
+			sphere.X = X;
+			sphere.Y = Y;
+
+			return sphere;
+		}
+
 
 		public override bool EditShape(string editString)
 		{

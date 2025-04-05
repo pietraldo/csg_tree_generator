@@ -20,6 +20,22 @@ namespace csg_tree_generator
 
 		public float EdgeLength { get; set; }
 
+		public override Node Clone()
+		{
+			Cube cube = new Cube();
+			cube.PosX = PosX;
+			cube.PosY = PosY;
+			cube.PosZ = PosZ;
+			cube.Red = Red;
+			cube.Green = Green;
+			cube.Blue = Blue;
+			cube.EdgeLength = EdgeLength;
+			cube.type = type;
+			cube.hidenChildren = hidenChildren;
+			cube.X = X;
+			cube.Y = Y;
+			return cube;
+		}
 		public override string ToString(bool withName)
 		{
 			return withName ? "Cube " + ToString() : ToString();
