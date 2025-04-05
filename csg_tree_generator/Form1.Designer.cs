@@ -77,6 +77,7 @@
 			btnCreateCube.TabIndex = 2;
 			btnCreateCube.Text = "Create Cube";
 			btnCreateCube.UseVisualStyleBackColor = true;
+			btnCreateCube.Click += btnCreateCube_Click;
 			// 
 			// btnCreateCylinder
 			// 
@@ -86,6 +87,7 @@
 			btnCreateCylinder.TabIndex = 1;
 			btnCreateCylinder.Text = "Create Cylinder";
 			btnCreateCylinder.UseVisualStyleBackColor = true;
+			btnCreateCylinder.Click += btnCreateCylinder_Click;
 			// 
 			// btnCreatSphere
 			// 

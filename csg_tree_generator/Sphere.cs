@@ -9,7 +9,6 @@ namespace csg_tree_generator
 {
 	public class Sphere:Node
 	{
-		public float Radius { get; set; }
 		public float PosX { get; set; }
 		public float PosY { get; set; }
 		public float PosZ { get; set; }
@@ -17,6 +16,8 @@ namespace csg_tree_generator
 		public int Red { get; set; }
 		public int Green { get; set; }
 		public int Blue { get; set; }
+
+		public float Radius { get; set; }
 
 		public override string ToString()
 		{
