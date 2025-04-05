@@ -381,5 +381,27 @@ public partial class mainWindow : Form
 	{
 		SelectCsgViewerProgramPath();
 	}
+
+	private void importToolStripMenuItem_Click(object sender, EventArgs e)
+	{
+		using (OpenFileDialog openFileDialog = new OpenFileDialog())
+		{
+			openFileDialog.Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*";
+			openFileDialog.Title = "Import Tree from File";
+			if (openFileDialog.ShowDialog() == DialogResult.OK)
+			{
+				try
+				{
+					scene.ImportTree(openFileDialog.FileName);
+				}
+				catch (ImportException ex)
+				{
+					MessageBox.Show(ex.Message, "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					return;
+				}
+				Invalidate();
+			}
+		}
+	}
 }
 

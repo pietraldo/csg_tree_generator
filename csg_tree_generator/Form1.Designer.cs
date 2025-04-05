@@ -163,6 +163,7 @@
 			importToolStripMenuItem.Name = "importToolStripMenuItem";
 			importToolStripMenuItem.Size = new Size(180, 22);
 			importToolStripMenuItem.Text = "Import";
+			importToolStripMenuItem.Click += importToolStripMenuItem_Click;
 			// 
 			// csgProgramViewerToolStripMenuItem
 			// 

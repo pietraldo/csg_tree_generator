@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms.Design;
+using System.Xml.Linq;
 
 namespace csg_tree_generator
 {
@@ -159,7 +160,7 @@ namespace csg_tree_generator
 
 		internal void ExportTree(Node? selectedNode, string file_path)
 		{
-			if(selectedNode == null) 
+			if (selectedNode == null)
 				throw new ExportException("No tree selected");
 
 			StringBuilder sb = new StringBuilder();
@@ -167,16 +168,111 @@ namespace csg_tree_generator
 			string exportString = sb.ToString();
 
 			// Save to file
-			File.WriteAllText(file_path,  exportString );
+			File.WriteAllText(file_path, exportString);
 		}
 
 		public void BuildExportString(int indentLevel, Node node, StringBuilder sb)
 		{
-			if(node == null) return;
+			if (node == null) return;
 			sb.Append(new string('\t', indentLevel));
 			sb.AppendLine(node.ToString(true));
 			BuildExportString(indentLevel + 1, node.left, sb);
 			BuildExportString(indentLevel + 1, node.right, sb);
+		}
+
+		public void ImportTree(string file_name)
+		{
+			Node? root = null;
+			Node? last = null;
+			string[] lines = File.ReadAllLines(file_name);
+			foreach (string line in lines)
+			{
+				string[] data = line.Trim().Split(' ');
+
+				Node node;
+				if (data[0] == "Union")
+				{
+					node = new Node();
+					node.type = NodeType.Union;
+				}
+				else if (data[0] == "Intersection")
+				{
+					node = new Node();
+					node.type = NodeType.Intersection;
+				}
+				else if (data[0] == "Difference")
+				{
+					node = new Node();
+					node.type = NodeType.Difference;
+				}
+				else if (data[0] == "Sphere")
+				{
+					Sphere sphere = new Sphere();
+					sphere.type = NodeType.Sphere;
+					string join = string.Join(" ", data.Skip(1));
+					sphere.EditShape(join);
+					node = sphere;
+				}
+				else if (data[0] == "Cube")
+				{
+					Cube cube = new Cube();
+					cube.type = NodeType.Cube;
+					string join = string.Join(" ", data.Skip(1));
+					cube.EditShape(join);
+					node = cube;
+				}
+				else if (data[0] == "Cylinder")
+				{
+					Cylinder cylinder = new Cylinder();
+					cylinder.type = NodeType.Cylinder;
+					string join = string.Join(" ", data.Skip(1));
+					cylinder.EditShape(join);
+					node = cylinder;
+				}
+				else
+				{
+					throw new ImportException("Unknown node type");
+				}
+				if (root == null)
+				{
+					trees.Add(node);
+					root = node;
+					last = node;
+					continue;
+				}
+
+				
+				while (last!= null && ((last.type != NodeType.Union
+					&& last.type != NodeType.Intersection
+					&& last.type != NodeType.Difference) 
+					|| (last.right != null && last.left != null)))
+				{
+					last = last.parent;
+				}
+				if (last == null)
+					throw new ImportException("Tree is wrong");
+				if (last.left == null)
+				{
+					last.left = node;
+					node.parent = last;
+					last = node;
+				}
+				else if (last.right == null)
+				{
+					last.right = node;
+					node.parent = last;
+					last = node;
+				}
+
+
+			}
+			if (root == null)
+			{
+				throw new ImportException("Tree is empty");
+			}
+
+			AdjustTree(root);
+
 		}
 	}
 }
