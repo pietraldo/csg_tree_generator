@@ -19,7 +19,8 @@ public enum EditingMode
 	MakeUnionNode,
 	MakeIntersectionNode,
 	MakeDifferenceNode,
-	EditShape
+	EditShape,
+	DeleteTree
 }
 
 public partial class mainWindow : Form
@@ -164,6 +165,9 @@ public partial class mainWindow : Form
 							txtEdit.Text = cube.ToString();
 						}
 						break;
+					case EditingMode.DeleteTree:
+						scene.DeleteTree(node);
+						break;
 					default:
 						mouseMode = MouseMode.MoveTree;
 						changedMode = true;
@@ -195,7 +199,7 @@ public partial class mainWindow : Form
 			case 'a':
 				editingMode = EditingMode.AdjustNode;
 				break;
-			case 'd':
+			case 'r':
 				editingMode = EditingMode.RemoveNode;
 				break;
 			case 'u':
@@ -209,6 +213,9 @@ public partial class mainWindow : Form
 				break;
 			case 'e':
 				editingMode = EditingMode.EditShape;
+				break;
+			case 'd':
+				editingMode = EditingMode.DeleteTree;
 				break;
 			default:
 				editingMode = EditingMode.None;

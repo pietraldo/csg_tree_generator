@@ -180,8 +180,35 @@ namespace csg_tree_generator
 			BuildExportString(indentLevel + 1, node.right, sb);
 		}
 
+		public void DeleteTree(Node? node)
+		{
+			if(node == null) return;
+			if(trees.Contains(node))
+			{
+				trees.Remove(node);
+			}
+			else if (node.parent != null)
+			{
+				if (node.parent.left == node)
+					node.parent.left = null;
+				else if (node.parent.right == node)
+					node.parent.right = null;
+				node.parent = null;
+			}
+		}
+
 		public void ImportTree(string file_name)
 		{
+			Dictionary<string, INodeFactory> factories = new Dictionary<string, INodeFactory>
+			{
+				{ "Union", new UnionFactory() },
+				{ "Intersection", new IntersectionFactory() },
+				{ "Difference", new DifferenceFactory() },
+				{ "Sphere", new SphereFactory() },
+				{ "Cube", new CubeFactory() },
+				{ "Cylinder", new CylinderFactory() }
+			};
+
 			Node? root = null;
 			Node? last = null;
 			string[] lines = File.ReadAllLines(file_name);
@@ -189,50 +216,11 @@ namespace csg_tree_generator
 			{
 				string[] data = line.Trim().Split(' ');
 
-				Node node;
-				if (data[0] == "Union")
-				{
-					node = new Node();
-					node.type = NodeType.Union;
-				}
-				else if (data[0] == "Intersection")
-				{
-					node = new Node();
-					node.type = NodeType.Intersection;
-				}
-				else if (data[0] == "Difference")
-				{
-					node = new Node();
-					node.type = NodeType.Difference;
-				}
-				else if (data[0] == "Sphere")
-				{
-					Sphere sphere = new Sphere();
-					sphere.type = NodeType.Sphere;
-					string join = string.Join(" ", data.Skip(1));
-					sphere.EditShape(join);
-					node = sphere;
-				}
-				else if (data[0] == "Cube")
-				{
-					Cube cube = new Cube();
-					cube.type = NodeType.Cube;
-					string join = string.Join(" ", data.Skip(1));
-					cube.EditShape(join);
-					node = cube;
-				}
-				else if (data[0] == "Cylinder")
-				{
-					Cylinder cylinder = new Cylinder();
-					cylinder.type = NodeType.Cylinder;
-					string join = string.Join(" ", data.Skip(1));
-					cylinder.EditShape(join);
-					node = cylinder;
-				}
-				else
+				if (!factories.TryGetValue(data[0], out var factory))
 				{
 					throw new ImportException("Unknown node type");
 				}
+				Node node = factory.CreateNode(data);
 				if (root == null)
 				{
 					trees.Add(node);
@@ -241,10 +229,10 @@ namespace csg_tree_generator
 					continue;
 				}
 
-				
-				while (last!= null && ((last.type != NodeType.Union
+
+				while (last != null && ((last.type != NodeType.Union
 					&& last.type != NodeType.Intersection
-					&& last.type != NodeType.Difference) 
+					&& last.type != NodeType.Difference)
 					|| (last.right != null && last.left != null)))
 				{
 					last = last.parent;
