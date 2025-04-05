@@ -157,7 +157,7 @@ namespace csg_tree_generator
 			return null;
 		}
 
-		internal void ExportTree(Node? selectedNode)
+		internal void ExportTree(Node? selectedNode, string file_path)
 		{
 			if(selectedNode == null) 
 				throw new ExportException("No tree selected");
@@ -167,15 +167,14 @@ namespace csg_tree_generator
 			string exportString = sb.ToString();
 
 			// Save to file
-			File.WriteAllText("C:\\Users\\pietr\\Desktop\\export.txt",  exportString );
-			return;
+			File.WriteAllText(file_path,  exportString );
 		}
 
 		public void BuildExportString(int indentLevel, Node node, StringBuilder sb)
 		{
 			if(node == null) return;
 			sb.Append(new string('\t', indentLevel));
-			sb.AppendLine(node.ToString());
+			sb.AppendLine(node.ToString(true));
 			BuildExportString(indentLevel + 1, node.left, sb);
 			BuildExportString(indentLevel + 1, node.right, sb);
 		}

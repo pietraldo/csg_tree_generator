@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -276,11 +277,64 @@ public partial class mainWindow : Form
 	{
 		try
 		{
-			scene.ExportTree(scene.SelectedNode);
+			scene.ExportTree(scene.SelectedNode, "C:\\Users\\pietr\\Desktop\\export.txt");
 		}
-		catch(ExportException ex)
+		catch (ExportException ex)
 		{
 			MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+		}
+	}
+
+	private void btnResult_Click(object sender, EventArgs e)
+	{
+		string saving_path = "tree.txt";
+		string program_path = "C:/Users/pietr/Documents/studia/karty graficzne/comparision/CUDA-CSG-Tree-Raycasting/x64/Release/CSGRayCasting.exe";
+		string camera_path = "camera.ini";
+
+		try
+		{
+			scene.ExportTree(scene.SelectedNode, saving_path);
+		}
+		catch (ExportException ex)
+		{
+			MessageBox.Show(ex.Message, "Export Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			return;
+		}
+
+		try
+		{
+			var processStartInfo = new ProcessStartInfo
+			{
+				FileName = program_path,
+				Arguments = $"\"{saving_path}\" \"{camera_path}\"",
+				UseShellExecute = false,
+				RedirectStandardOutput = true,
+				RedirectStandardError = true,
+				CreateNoWindow = true
+			};
+
+			var process = new Process();
+			process.StartInfo = processStartInfo;
+
+			process.OutputDataReceived += (sender, args) =>
+			{
+				if (!string.IsNullOrWhiteSpace(args.Data))
+					Debug.WriteLine("[OUT] " + args.Data);
+			};
+
+			process.ErrorDataReceived += (sender, args) =>
+			{
+				if (!string.IsNullOrWhiteSpace(args.Data))
+					Debug.WriteLine("[ERR] " + args.Data);
+			};
+
+			process.Start();
+			process.BeginOutputReadLine();
+			process.BeginErrorReadLine();
+		}
+		catch (Exception ex)
+		{
+			MessageBox.Show(ex.Message, "Failed to start external program", MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

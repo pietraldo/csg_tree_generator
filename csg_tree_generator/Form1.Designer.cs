@@ -40,6 +40,7 @@
 			exportToolStripMenuItem = new ToolStripMenuItem();
 			selectedTreeToolStripMenuItem = new ToolStripMenuItem();
 			importToolStripMenuItem = new ToolStripMenuItem();
+			btnResult = new Button();
 			panel1.SuspendLayout();
 			menuStrip1.SuspendLayout();
 			SuspendLayout();
@@ -47,6 +48,7 @@
 			// panel1
 			// 
 			panel1.BackColor = Color.Cyan;
+			panel1.Controls.Add(btnResult);
 			panel1.Controls.Add(btnSave);
 			panel1.Controls.Add(txtEdit);
 			panel1.Controls.Add(btnCreateCube);
@@ -150,6 +152,16 @@
 			importToolStripMenuItem.Size = new Size(180, 22);
 			importToolStripMenuItem.Text = "Import";
 			// 
+			// btnResult
+			// 
+			btnResult.Location = new Point(51, 182);
+			btnResult.Name = "btnResult";
+			btnResult.Size = new Size(75, 23);
+			btnResult.TabIndex = 5;
+			btnResult.Text = "See Result";
+			btnResult.UseVisualStyleBackColor = true;
+			btnResult.Click += btnResult_Click;
+			// 
 			// mainWindow
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
@@ -189,5 +201,6 @@
 		private ToolStripMenuItem exportToolStripMenuItem;
 		private ToolStripMenuItem importToolStripMenuItem;
 		private ToolStripMenuItem selectedTreeToolStripMenuItem;
+		private Button btnResult;
 	}
 }

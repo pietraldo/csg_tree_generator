@@ -76,7 +76,10 @@ namespace csg_tree_generator
 			child.parent = this;
 			return true;
 		}
-
+		public virtual string ToString(bool withName)
+		{
+			return ToString();
+		}
 		public override string ToString()
 		{
 			return type.ToString();

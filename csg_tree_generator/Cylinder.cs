@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,10 @@ namespace csg_tree_generator
 		public float RotationY { get; set; }
 		public float RotationZ { get; set; }
 
+		public override string ToString(bool withName)
+		{
+			return withName ? "Cylinder " + ToString() : ToString();
+		}
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder();
@@ -33,11 +38,9 @@ namespace csg_tree_generator
 			sb.Append(" ");
 			sb.Append(PosZ.ToString());
 			sb.Append(" ");
-			sb.Append(Red.ToString("X"));
-			sb.Append(" ");
-			sb.Append(Green.ToString("X"));
-			sb.Append(" ");
-			sb.Append(Blue.ToString("X"));
+			sb.Append(Red.ToString("X2"));
+			sb.Append(Green.ToString("X2"));
+			sb.Append(Blue.ToString("X2"));
 			sb.Append(" ");
 			sb.Append(Radius.ToString());
 			sb.Append(" ");
@@ -54,32 +57,39 @@ namespace csg_tree_generator
 		public override bool EditShape(string editString)
 		{
 			string[] strings = editString.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-			if (strings.Length < 11)
+			if (strings.Length < 9)
 				return false;
-			if (float.TryParse(strings[0], out float x) &&
+			try
+			{
+				if (float.TryParse(strings[0], out float x) &&
 				float.TryParse(strings[1], out float y) &&
 				float.TryParse(strings[2], out float z) &&
-				int.TryParse(strings[3], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int red) &&
-				int.TryParse(strings[4], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int green) &&
-				int.TryParse(strings[5], NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int blue) &&
-				float.TryParse(strings[6], out float radius) &&
-				float.TryParse(strings[7], out float height) &&
-				float.TryParse(strings[8], out float rotationX) &&
-				float.TryParse(strings[9], out float rotationY) &&
-				float.TryParse(strings[10], out float rotationZ))
+				int.TryParse(strings[3].Substring(0, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int red) &&
+				int.TryParse(strings[3].Substring(2, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int green) &&
+				int.TryParse(strings[3].Substring(4, 2), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out int blue) &&
+				float.TryParse(strings[4], out float radius) &&
+				float.TryParse(strings[5], out float height) &&
+				float.TryParse(strings[6], out float rotationX) &&
+				float.TryParse(strings[7], out float rotationY) &&
+				float.TryParse(strings[8], out float rotationZ))
+				{
+					PosX = x;
+					PosY = y;
+					PosZ = z;
+					Red = red;
+					Green = green;
+					Blue = blue;
+					Radius = radius;
+					Height = height;
+					RotationX = rotationX;
+					RotationY = rotationY;
+					RotationZ = rotationZ;
+					return true;
+				}
+			}
+			catch(Exception ex)
 			{
-				PosX = x;
-				PosY = y;
-				PosZ = z;
-				Red = red;
-				Green = green;
-				Blue = blue;
-				Radius = radius;
-				Height = height;
-				RotationX = rotationX;
-				RotationY = rotationY;
-				RotationZ = rotationZ;
-				return true;
+				Debug.WriteLine(ex.Message);
 			}
 			return false;
 		}
