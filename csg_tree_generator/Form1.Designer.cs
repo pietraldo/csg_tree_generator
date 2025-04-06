@@ -43,6 +43,7 @@
 			importToolStripMenuItem = new ToolStripMenuItem();
 			csgProgramViewerToolStripMenuItem = new ToolStripMenuItem();
 			selectToolStripMenuItem = new ToolStripMenuItem();
+			txtGenerateShapes = new Button();
 			panel1.SuspendLayout();
 			menuStrip1.SuspendLayout();
 			SuspendLayout();
@@ -50,6 +51,7 @@
 			// panel1
 			// 
 			panel1.BackColor = Color.Cyan;
+			panel1.Controls.Add(txtGenerateShapes);
 			panel1.Controls.Add(btnResult);
 			panel1.Controls.Add(btnSave);
 			panel1.Controls.Add(txtEdit);
@@ -64,7 +66,7 @@
 			// 
 			// btnResult
 			// 
-			btnResult.Location = new Point(51, 182);
+			btnResult.Location = new Point(51, 211);
 			btnResult.Name = "btnResult";
 			btnResult.Size = new Size(75, 23);
 			btnResult.TabIndex = 5;
@@ -148,7 +150,7 @@
 			// 
 			exportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { selectedTreeToolStripMenuItem });
 			exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-			exportToolStripMenuItem.Size = new Size(180, 22);
+			exportToolStripMenuItem.Size = new Size(110, 22);
 			exportToolStripMenuItem.Text = "Export";
 			// 
 			// selectedTreeToolStripMenuItem
@@ -161,7 +163,7 @@
 			// importToolStripMenuItem
 			// 
 			importToolStripMenuItem.Name = "importToolStripMenuItem";
-			importToolStripMenuItem.Size = new Size(180, 22);
+			importToolStripMenuItem.Size = new Size(110, 22);
 			importToolStripMenuItem.Text = "Import";
 			importToolStripMenuItem.Click += importToolStripMenuItem_Click;
 			// 
@@ -175,9 +177,19 @@
 			// selectToolStripMenuItem
 			// 
 			selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-			selectToolStripMenuItem.Size = new Size(180, 22);
+			selectToolStripMenuItem.Size = new Size(105, 22);
 			selectToolStripMenuItem.Text = "Select";
 			selectToolStripMenuItem.Click += selectToolStripMenuItem_Click;
+			// 
+			// txtGenerateShapes
+			// 
+			txtGenerateShapes.Location = new Point(35, 182);
+			txtGenerateShapes.Name = "txtGenerateShapes";
+			txtGenerateShapes.Size = new Size(103, 23);
+			txtGenerateShapes.TabIndex = 6;
+			txtGenerateShapes.Text = "Generate shapes";
+			txtGenerateShapes.UseVisualStyleBackColor = true;
+			txtGenerateShapes.Click += txtGenerateShapes_Click;
 			// 
 			// mainWindow
 			// 
@@ -222,5 +234,6 @@
 		private Button btnResult;
 		private ToolStripMenuItem csgProgramViewerToolStripMenuItem;
 		private ToolStripMenuItem selectToolStripMenuItem;
+		private Button txtGenerateShapes;
 	}
 }

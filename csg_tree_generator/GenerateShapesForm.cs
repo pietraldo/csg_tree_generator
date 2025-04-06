@@ -10,11 +10,21 @@ using System.Windows.Forms;
 
 namespace csg_tree_generator
 {
-	public partial class CreateSphere : Form
+	public partial class GenerateShapesForm : Form
 	{
-		public CreateSphere()
+		public GenerateShapesForm()
 		{
 			InitializeComponent();
+		}
+
+		private void label5_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void numericUpDown5_ValueChanged(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

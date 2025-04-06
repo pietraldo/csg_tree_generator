@@ -418,5 +418,11 @@ public partial class mainWindow : Form
 			}
 		}
 	}
+
+	private void txtGenerateShapes_Click(object sender, EventArgs e)
+	{
+		GenerateShapesForm generateShapesForm = new GenerateShapesForm();
+		generateShapesForm.ShowDialog();
+	}
 }
 
