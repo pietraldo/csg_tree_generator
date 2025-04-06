@@ -175,7 +175,7 @@ namespace csg_tree_generator
 		{
 			if (node == null) return;
 			sb.Append(new string('\t', indentLevel));
-			sb.AppendLine(node.ToString(true));
+			sb.AppendLine(node.ToString(true).Replace(',', '.'));
 			BuildExportString(indentLevel + 1, node.left, sb);
 			BuildExportString(indentLevel + 1, node.right, sb);
 		}
@@ -240,7 +240,7 @@ namespace csg_tree_generator
 			string[] lines = File.ReadAllLines(file_name);
 			foreach (string line in lines)
 			{
-				string[] data = line.Trim().Split(' ');
+				string[] data = line.Replace('.',',').Trim().Split(' ');
 
 				if (!factories.TryGetValue(data[0], out var factory))
 				{

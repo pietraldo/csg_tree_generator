@@ -27,17 +27,17 @@ namespace csg_tree_generator
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.Append(PosX.ToString());
+			sb.Append(PosX.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(PosY.ToString());
+			sb.Append(PosY.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(PosZ.ToString());
+			sb.Append(PosZ.ToString("F2"));
 			sb.Append(" ");
 			sb.Append(Red.ToString("X2"));
 			sb.Append(Green.ToString("X2"));
 			sb.Append(Blue.ToString("X2"));
 			sb.Append(" ");
-			sb.Append(Radius.ToString());
+			sb.Append(Radius.ToString("F2"));
 			return sb.ToString();
 		}
 		public override Node Clone()

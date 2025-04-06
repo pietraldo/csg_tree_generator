@@ -66,6 +66,26 @@
 			label9 = new Label();
 			txtWidthMin = new NumericUpDown();
 			chBoxReplace = new CheckBox();
+			txtGenerate = new Button();
+			chBoxSphere = new CheckBox();
+			chBoxCube = new CheckBox();
+			chBoxCylinder = new CheckBox();
+			label10 = new Label();
+			label11 = new Label();
+			label12 = new Label();
+			label13 = new Label();
+			label14 = new Label();
+			label15 = new Label();
+			label16 = new Label();
+			label17 = new Label();
+			label18 = new Label();
+			label19 = new Label();
+			label20 = new Label();
+			label21 = new Label();
+			label22 = new Label();
+			label23 = new Label();
+			label24 = new Label();
+			label25 = new Label();
 			((System.ComponentModel.ISupportInitialize)txtXMin).BeginInit();
 			((System.ComponentModel.ISupportInitialize)txtYMin).BeginInit();
 			((System.ComponentModel.ISupportInitialize)txtZMin).BeginInit();
@@ -179,6 +199,7 @@
 			txtRadiusMax.Name = "txtRadiusMax";
 			txtRadiusMax.Size = new Size(120, 23);
 			txtRadiusMax.TabIndex = 8;
+			txtRadiusMax.Value = new decimal(new int[] { 2, 0, 0, 0 });
 			txtRadiusMax.Enter += NumericUpDown_Enter;
 			// 
 			// txtZMax
@@ -189,6 +210,7 @@
 			txtZMax.Name = "txtZMax";
 			txtZMax.Size = new Size(120, 23);
 			txtZMax.TabIndex = 6;
+			txtZMax.Value = new decimal(new int[] { 2, 0, 0, 0 });
 			txtZMax.Enter += NumericUpDown_Enter;
 			// 
 			// txtYMax
@@ -199,6 +221,7 @@
 			txtYMax.Name = "txtYMax";
 			txtYMax.Size = new Size(120, 23);
 			txtYMax.TabIndex = 4;
+			txtYMax.Value = new decimal(new int[] { 2, 0, 0, 0 });
 			txtYMax.Enter += NumericUpDown_Enter;
 			// 
 			// txtXMax
@@ -209,6 +232,7 @@
 			txtXMax.Name = "txtXMax";
 			txtXMax.Size = new Size(120, 23);
 			txtXMax.TabIndex = 2;
+			txtXMax.Value = new decimal(new int[] { 2, 0, 0, 0 });
 			txtXMax.Enter += NumericUpDown_Enter;
 			// 
 			// txtRotationXMax
@@ -219,6 +243,7 @@
 			txtRotationXMax.Name = "txtRotationXMax";
 			txtRotationXMax.Size = new Size(120, 23);
 			txtRotationXMax.TabIndex = 10;
+			txtRotationXMax.Value = new decimal(new int[] { 30, 0, 0, 0 });
 			txtRotationXMax.Enter += NumericUpDown_Enter;
 			// 
 			// label5
@@ -229,7 +254,6 @@
 			label5.Size = new Size(62, 15);
 			label5.TabIndex = 15;
 			label5.Text = "Rotation X";
-			label5.Click += label5_Click;
 			// 
 			// txtRotationXMin
 			// 
@@ -249,6 +273,7 @@
 			txtRotationYMax.Name = "txtRotationYMax";
 			txtRotationYMax.Size = new Size(120, 23);
 			txtRotationYMax.TabIndex = 12;
+			txtRotationYMax.Value = new decimal(new int[] { 30, 0, 0, 0 });
 			txtRotationYMax.Enter += NumericUpDown_Enter;
 			// 
 			// label6
@@ -278,6 +303,7 @@
 			txtRotationZMax.Name = "txtRotationZMax";
 			txtRotationZMax.Size = new Size(120, 23);
 			txtRotationZMax.TabIndex = 14;
+			txtRotationZMax.Value = new decimal(new int[] { 30, 0, 0, 0 });
 			txtRotationZMax.Enter += NumericUpDown_Enter;
 			// 
 			// label7
@@ -307,6 +333,7 @@
 			txtHeightMax.Name = "txtHeightMax";
 			txtHeightMax.Size = new Size(120, 23);
 			txtHeightMax.TabIndex = 16;
+			txtHeightMax.Value = new decimal(new int[] { 2, 0, 0, 0 });
 			txtHeightMax.Enter += NumericUpDown_Enter;
 			// 
 			// label8
@@ -336,6 +363,7 @@
 			txtWidthMax.Name = "txtWidthMax";
 			txtWidthMax.Size = new Size(120, 23);
 			txtWidthMax.TabIndex = 18;
+			txtWidthMax.Value = new decimal(new int[] { 2, 0, 0, 0 });
 			txtWidthMax.Enter += NumericUpDown_Enter;
 			// 
 			// label9
@@ -367,11 +395,215 @@
 			chBoxReplace.Text = "Over write existing ones";
 			chBoxReplace.UseVisualStyleBackColor = true;
 			// 
+			// txtGenerate
+			// 
+			txtGenerate.Location = new Point(39, 416);
+			txtGenerate.Name = "txtGenerate";
+			txtGenerate.Size = new Size(109, 48);
+			txtGenerate.TabIndex = 29;
+			txtGenerate.Text = "Generate";
+			txtGenerate.UseVisualStyleBackColor = true;
+			txtGenerate.Click += txtGenerate_Click;
+			// 
+			// chBoxSphere
+			// 
+			chBoxSphere.AutoSize = true;
+			chBoxSphere.Location = new Point(39, 338);
+			chBoxSphere.Name = "chBoxSphere";
+			chBoxSphere.Size = new Size(62, 19);
+			chBoxSphere.TabIndex = 30;
+			chBoxSphere.Text = "Sphere";
+			chBoxSphere.UseVisualStyleBackColor = true;
+			// 
+			// chBoxCube
+			// 
+			chBoxCube.AutoSize = true;
+			chBoxCube.Location = new Point(39, 363);
+			chBoxCube.Name = "chBoxCube";
+			chBoxCube.Size = new Size(54, 19);
+			chBoxCube.TabIndex = 31;
+			chBoxCube.Text = "Cube";
+			chBoxCube.UseVisualStyleBackColor = true;
+			// 
+			// chBoxCylinder
+			// 
+			chBoxCylinder.AutoSize = true;
+			chBoxCylinder.Location = new Point(39, 388);
+			chBoxCylinder.Name = "chBoxCylinder";
+			chBoxCylinder.Size = new Size(70, 19);
+			chBoxCylinder.TabIndex = 32;
+			chBoxCylinder.Text = "Cylinder";
+			chBoxCylinder.UseVisualStyleBackColor = true;
+			// 
+			// label10
+			// 
+			label10.AutoSize = true;
+			label10.Location = new Point(473, 43);
+			label10.Name = "label10";
+			label10.Size = new Size(51, 15);
+			label10.TabIndex = 33;
+			label10.Text = "Cylinder";
+			// 
+			// label11
+			// 
+			label11.AutoSize = true;
+			label11.Location = new Point(473, 136);
+			label11.Name = "label11";
+			label11.Size = new Size(51, 15);
+			label11.TabIndex = 34;
+			label11.Text = "Cylinder";
+			// 
+			// label12
+			// 
+			label12.AutoSize = true;
+			label12.Location = new Point(473, 72);
+			label12.Name = "label12";
+			label12.Size = new Size(51, 15);
+			label12.TabIndex = 35;
+			label12.Text = "Cylinder";
+			// 
+			// label13
+			// 
+			label13.AutoSize = true;
+			label13.Location = new Point(473, 20);
+			label13.Name = "label13";
+			label13.Size = new Size(51, 15);
+			label13.TabIndex = 36;
+			label13.Text = "Cylinder";
+			// 
+			// label14
+			// 
+			label14.AutoSize = true;
+			label14.Location = new Point(473, 246);
+			label14.Name = "label14";
+			label14.Size = new Size(51, 15);
+			label14.TabIndex = 37;
+			label14.Text = "Cylinder";
+			// 
+			// label15
+			// 
+			label15.AutoSize = true;
+			label15.Location = new Point(337, 20);
+			label15.Name = "label15";
+			label15.Size = new Size(43, 15);
+			label15.TabIndex = 38;
+			label15.Text = "Sphere";
+			// 
+			// label16
+			// 
+			label16.AutoSize = true;
+			label16.Location = new Point(337, 43);
+			label16.Name = "label16";
+			label16.Size = new Size(43, 15);
+			label16.TabIndex = 39;
+			label16.Text = "Sphere";
+			// 
+			// label17
+			// 
+			label17.AutoSize = true;
+			label17.Location = new Point(337, 72);
+			label17.Name = "label17";
+			label17.Size = new Size(43, 15);
+			label17.TabIndex = 40;
+			label17.Text = "Sphere";
+			// 
+			// label18
+			// 
+			label18.AutoSize = true;
+			label18.Location = new Point(337, 136);
+			label18.Name = "label18";
+			label18.Size = new Size(43, 15);
+			label18.TabIndex = 41;
+			label18.Text = "Sphere";
+			// 
+			// label19
+			// 
+			label19.AutoSize = true;
+			label19.Location = new Point(473, 159);
+			label19.Name = "label19";
+			label19.Size = new Size(51, 15);
+			label19.TabIndex = 42;
+			label19.Text = "Cylinder";
+			// 
+			// label20
+			// 
+			label20.AutoSize = true;
+			label20.Location = new Point(473, 186);
+			label20.Name = "label20";
+			label20.Size = new Size(51, 15);
+			label20.TabIndex = 43;
+			label20.Text = "Cylinder";
+			// 
+			// label21
+			// 
+			label21.AutoSize = true;
+			label21.Location = new Point(473, 215);
+			label21.Name = "label21";
+			label21.Size = new Size(51, 15);
+			label21.TabIndex = 44;
+			label21.Text = "Cylinder";
+			// 
+			// label22
+			// 
+			label22.AutoSize = true;
+			label22.Location = new Point(403, 20);
+			label22.Name = "label22";
+			label22.Size = new Size(35, 15);
+			label22.TabIndex = 45;
+			label22.Text = "Cube";
+			// 
+			// label23
+			// 
+			label23.AutoSize = true;
+			label23.Location = new Point(403, 43);
+			label23.Name = "label23";
+			label23.Size = new Size(35, 15);
+			label23.TabIndex = 46;
+			label23.Text = "Cube";
+			// 
+			// label24
+			// 
+			label24.AutoSize = true;
+			label24.Location = new Point(403, 72);
+			label24.Name = "label24";
+			label24.Size = new Size(35, 15);
+			label24.TabIndex = 47;
+			label24.Text = "Cube";
+			// 
+			// label25
+			// 
+			label25.AutoSize = true;
+			label25.Location = new Point(421, 275);
+			label25.Name = "label25";
+			label25.Size = new Size(35, 15);
+			label25.TabIndex = 48;
+			label25.Text = "Cube";
+			// 
 			// GenerateShapesForm
 			// 
 			AutoScaleDimensions = new SizeF(7F, 15F);
 			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(507, 476);
+			ClientSize = new Size(574, 476);
+			Controls.Add(label25);
+			Controls.Add(label24);
+			Controls.Add(label23);
+			Controls.Add(label22);
+			Controls.Add(label21);
+			Controls.Add(label20);
+			Controls.Add(label19);
+			Controls.Add(label18);
+			Controls.Add(label17);
+			Controls.Add(label16);
+			Controls.Add(label15);
+			Controls.Add(label14);
+			Controls.Add(label13);
+			Controls.Add(label12);
+			Controls.Add(label11);
+			Controls.Add(label10);
+			Controls.Add(chBoxCylinder);
+			Controls.Add(chBoxCube);
+			Controls.Add(chBoxSphere);
+			Controls.Add(txtGenerate);
 			Controls.Add(chBoxReplace);
 			Controls.Add(txtWidthMax);
 			Controls.Add(label9);
@@ -457,5 +689,25 @@
 		private Label label9;
 		private NumericUpDown txtWidthMin;
 		private CheckBox chBoxReplace;
+		private Button txtGenerate;
+		private CheckBox chBoxSphere;
+		private CheckBox chBoxCube;
+		private CheckBox chBoxCylinder;
+		private Label label10;
+		private Label label11;
+		private Label label12;
+		private Label label13;
+		private Label label14;
+		private Label label15;
+		private Label label16;
+		private Label label17;
+		private Label label18;
+		private Label label19;
+		private Label label20;
+		private Label label21;
+		private Label label22;
+		private Label label23;
+		private Label label24;
+		private Label label25;
 	}
 }

@@ -421,7 +421,12 @@ public partial class mainWindow : Form
 
 	private void txtGenerateShapes_Click(object sender, EventArgs e)
 	{
-		GenerateShapesForm generateShapesForm = new GenerateShapesForm();
+		if(scene.SelectedNode == null)
+		{
+			MessageBox.Show("Select a node to generate shapes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+			return;
+		}
+		GenerateShapesForm generateShapesForm = new GenerateShapesForm(scene.SelectedNode);
 		generateShapesForm.ShowDialog();
 	}
 }
