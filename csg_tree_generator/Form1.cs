@@ -350,10 +350,11 @@ public partial class mainWindow : Form
 
 		try
 		{
+			string arguments = chBoxCameraUse.Checked ? $"\"{saving_tree_path}\"" : $"\"{saving_tree_path}\" \"{camera_path}\"";
 			var processStartInfo = new ProcessStartInfo
 			{
 				FileName = csgProgramPath,
-				Arguments = $"\"{saving_tree_path}\" \"{camera_path}\"",
+				Arguments = arguments,
 				UseShellExecute = false,
 				RedirectStandardOutput = true,
 				RedirectStandardError = true,
@@ -372,7 +373,11 @@ public partial class mainWindow : Form
 			process.ErrorDataReceived += (sender, args) =>
 			{
 				if (!string.IsNullOrWhiteSpace(args.Data))
+				{
 					Debug.WriteLine("[ERR] " + args.Data);
+					MessageBox.Show(args.Data, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+				}
+
 			};
 
 			process.Start();
@@ -421,13 +426,18 @@ public partial class mainWindow : Form
 
 	private void txtGenerateShapes_Click(object sender, EventArgs e)
 	{
-		if(scene.SelectedNode == null)
+		if (scene.SelectedNode == null)
 		{
 			MessageBox.Show("Select a node to generate shapes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			return;
 		}
 		GenerateShapesForm generateShapesForm = new GenerateShapesForm(scene.SelectedNode);
 		generateShapesForm.ShowDialog();
+	}
+
+	private void chBoxCameraUse_CheckedChanged(object sender, EventArgs e)
+	{
+
 	}
 }
 

@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			panel1 = new Panel();
+			txtGenerateShapes = new Button();
 			btnResult = new Button();
 			btnSave = new Button();
 			txtEdit = new TextBox();
@@ -43,7 +44,7 @@
 			importToolStripMenuItem = new ToolStripMenuItem();
 			csgProgramViewerToolStripMenuItem = new ToolStripMenuItem();
 			selectToolStripMenuItem = new ToolStripMenuItem();
-			txtGenerateShapes = new Button();
+			chBoxCameraUse = new CheckBox();
 			panel1.SuspendLayout();
 			menuStrip1.SuspendLayout();
 			SuspendLayout();
@@ -51,6 +52,7 @@
 			// panel1
 			// 
 			panel1.BackColor = Color.Cyan;
+			panel1.Controls.Add(chBoxCameraUse);
 			panel1.Controls.Add(txtGenerateShapes);
 			panel1.Controls.Add(btnResult);
 			panel1.Controls.Add(btnSave);
@@ -63,6 +65,16 @@
 			panel1.Name = "panel1";
 			panel1.Size = new Size(200, 426);
 			panel1.TabIndex = 0;
+			// 
+			// txtGenerateShapes
+			// 
+			txtGenerateShapes.Location = new Point(35, 182);
+			txtGenerateShapes.Name = "txtGenerateShapes";
+			txtGenerateShapes.Size = new Size(103, 23);
+			txtGenerateShapes.TabIndex = 6;
+			txtGenerateShapes.Text = "Generate shapes";
+			txtGenerateShapes.UseVisualStyleBackColor = true;
+			txtGenerateShapes.Click += txtGenerateShapes_Click;
 			// 
 			// btnResult
 			// 
@@ -181,15 +193,16 @@
 			selectToolStripMenuItem.Text = "Select";
 			selectToolStripMenuItem.Click += selectToolStripMenuItem_Click;
 			// 
-			// txtGenerateShapes
+			// chBoxCameraUse
 			// 
-			txtGenerateShapes.Location = new Point(35, 182);
-			txtGenerateShapes.Name = "txtGenerateShapes";
-			txtGenerateShapes.Size = new Size(103, 23);
-			txtGenerateShapes.TabIndex = 6;
-			txtGenerateShapes.Text = "Generate shapes";
-			txtGenerateShapes.UseVisualStyleBackColor = true;
-			txtGenerateShapes.Click += txtGenerateShapes_Click;
+			chBoxCameraUse.AutoSize = true;
+			chBoxCameraUse.Location = new Point(44, 240);
+			chBoxCameraUse.Name = "chBoxCameraUse";
+			chBoxCameraUse.Size = new Size(127, 19);
+			chBoxCameraUse.TabIndex = 7;
+			chBoxCameraUse.Text = "Use default camera";
+			chBoxCameraUse.UseVisualStyleBackColor = true;
+			chBoxCameraUse.CheckedChanged += chBoxCameraUse_CheckedChanged;
 			// 
 			// mainWindow
 			// 
@@ -235,5 +248,6 @@
 		private ToolStripMenuItem csgProgramViewerToolStripMenuItem;
 		private ToolStripMenuItem selectToolStripMenuItem;
 		private Button txtGenerateShapes;
+		private CheckBox chBoxCameraUse;
 	}
 }
