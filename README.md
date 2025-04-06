@@ -8,6 +8,10 @@ Program that helps creating trees in special format for csg program.
 - **To apply an editing mode**:
   1. Select a node with **left-click**.
   2. Then choose the target node with **right-click**.
+- **To see result**:
+  1. you need to attach .exe file for visualization
+  2. select tree to visualize
+  3. click see result
 
 ## 🎮 Keyboard Shortcuts
 
