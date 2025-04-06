@@ -47,9 +47,9 @@ namespace csg_tree_generator
 			public float X { get { return GetRandom(minX, maxX); } }
 			public float Y { get { return GetRandom(minY, maxY); } }
 			public float Z { get { return GetRandom(minZ, maxZ); } }
-			public int Red { get { return red; } }
-			public int Green { get { return green; } }
-			public int Blue { get { return blue; } }
+			public int Red { get { return Math.Clamp((red+(int)GetRandom(-20,20)), 0, 255); } }
+			public int Green { get { return Math.Clamp((green + (int)GetRandom(-20, 20)), 0, 255); ; } }
+			public int Blue { get { return Math.Clamp((blue + (int)GetRandom(-20, 20)), 0, 255); ; } }
 			public float Radius { get { return GetRandom(radiusMin, radiusMax); } }
 			public float RotationX { get { return GetRandom(rotationMinX, rotationMaxX); } }
 			public float RotationY { get { return GetRandom(rotationMinY, rotationMaxY); } }
@@ -227,6 +227,24 @@ namespace csg_tree_generator
 			sphere.Radius = parser.Radius;
 			sphere.type = NodeType.Sphere;
 			return sphere;
+		}
+
+		private void btnSelectColor_Click(object sender, EventArgs e)
+		{
+			using(ColorDialog colorDialog = new ColorDialog())
+			{
+				colorDialog.AllowFullOpen = true;
+				colorDialog.ShowHelp = true;
+				colorDialog.Color = btnSelectColor.BackColor;
+
+				if (colorDialog.ShowDialog() == DialogResult.OK)
+				{
+					btnSelectColor.BackColor = colorDialog.Color;
+					btnSelectColor.Text = colorDialog.Color.R.ToString("X2") + " " +
+						colorDialog.Color.G.ToString("X2") + " " +
+						colorDialog.Color.B.ToString("X2");
+				}
+			}
 		}
 	}
 }

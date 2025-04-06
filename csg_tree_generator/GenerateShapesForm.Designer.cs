@@ -114,6 +114,7 @@
 			btnSelectColor.TabIndex = 21;
 			btnSelectColor.Text = "Select Color";
 			btnSelectColor.UseVisualStyleBackColor = true;
+			btnSelectColor.Click += btnSelectColor_Click;
 			// 
 			// txtXMin
 			// 
@@ -635,7 +636,7 @@
 			Controls.Add(txtXMin);
 			Controls.Add(btnSelectColor);
 			Name = "GenerateShapesForm";
-			Text = "CreateSphere";
+			Text = "Generate shapes";
 			((System.ComponentModel.ISupportInitialize)txtXMin).EndInit();
 			((System.ComponentModel.ISupportInitialize)txtYMin).EndInit();
 			((System.ComponentModel.ISupportInitialize)txtZMin).EndInit();

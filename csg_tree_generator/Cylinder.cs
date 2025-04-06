@@ -53,25 +53,25 @@ namespace csg_tree_generator
 		public override string ToString()
 		{
 			StringBuilder sb = new StringBuilder();
-			sb.Append(PosX.ToString());
+			sb.Append(PosX.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(PosY.ToString());
+			sb.Append(PosY.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(PosZ.ToString());
+			sb.Append(PosZ.ToString("F2"));
 			sb.Append(" ");
 			sb.Append(Red.ToString("X2"));
 			sb.Append(Green.ToString("X2"));
 			sb.Append(Blue.ToString("X2"));
 			sb.Append(" ");
-			sb.Append(Radius.ToString());
+			sb.Append(Radius.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(Height.ToString());
+			sb.Append(Height.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(RotationX.ToString());
+			sb.Append(RotationX.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(RotationY.ToString());
+			sb.Append(RotationY.ToString("F2"));
 			sb.Append(" ");
-			sb.Append(RotationZ.ToString());
+			sb.Append(RotationZ.ToString("F2"));
 			return sb.ToString();
 		}
 
