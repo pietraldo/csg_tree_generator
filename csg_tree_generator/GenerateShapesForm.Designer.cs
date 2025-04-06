@@ -121,6 +121,7 @@
 			txtXMin.DecimalPlaces = 2;
 			txtXMin.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
 			txtXMin.Location = new Point(85, 12);
+			txtXMin.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
 			txtXMin.Name = "txtXMin";
 			txtXMin.Size = new Size(120, 23);
 			txtXMin.TabIndex = 1;
@@ -131,6 +132,7 @@
 			txtYMin.DecimalPlaces = 2;
 			txtYMin.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
 			txtYMin.Location = new Point(85, 41);
+			txtYMin.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
 			txtYMin.Name = "txtYMin";
 			txtYMin.Size = new Size(120, 23);
 			txtYMin.TabIndex = 3;
@@ -141,6 +143,7 @@
 			txtZMin.DecimalPlaces = 2;
 			txtZMin.Increment = new decimal(new int[] { 1, 0, 0, 131072 });
 			txtZMin.Location = new Point(85, 70);
+			txtZMin.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
 			txtZMin.Name = "txtZMin";
 			txtZMin.Size = new Size(120, 23);
 			txtZMin.TabIndex = 5;
