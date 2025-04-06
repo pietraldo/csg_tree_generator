@@ -22,7 +22,8 @@ public enum EditingMode
 	EditShape,
 	DeleteTree,
 	CopyTree,
-	CreateNode
+	CreateNode,
+	HideShowChildren
 }
 
 public partial class mainWindow : Form
@@ -36,6 +37,20 @@ public partial class mainWindow : Form
 	string csgProgramPath = "";
 	string saving_tree_path = "tree.txt";
 	string camera_path = "camera.ini";
+
+	private Dictionary<Keys, EditingMode> keyMappings = new Dictionary<Keys, EditingMode>
+		{
+			{ Keys.A, EditingMode.AdjustNode },
+			{ Keys.R, EditingMode.RemoveNode },
+			{ Keys.U, EditingMode.MakeUnionNode },
+			{ Keys.I, EditingMode.MakeIntersectionNode },
+			{ Keys.S, EditingMode.MakeDifferenceNode },
+			{ Keys.E, EditingMode.EditShape },
+			{ Keys.D, EditingMode.DeleteTree },
+			{ Keys.C, EditingMode.CopyTree },
+			{ Keys.N, EditingMode.CreateNode }
+		};
+
 	public mainWindow()
 	{
 		InitializeComponent();
@@ -114,8 +129,6 @@ public partial class mainWindow : Form
 
 				if (scene.JoinTrees(node)) break;
 			}
-			mouseMode = MouseMode.None;
-
 		}
 		mouseMode = MouseMode.None;
 	}
@@ -188,7 +201,7 @@ public partial class mainWindow : Form
 			}
 		}
 
-		if(editingMode== EditingMode.CreateNode)
+		if (editingMode == EditingMode.CreateNode)
 		{
 			scene.CreateNode(worldCordinates);
 			editingMode = EditingMode.None;
@@ -204,39 +217,14 @@ public partial class mainWindow : Form
 
 	private void mainWindow_KeyPress(object sender, KeyPressEventArgs e)
 	{
-
-		switch (e.KeyChar)
+		char keyChar = char.ToUpper(e.KeyChar);
+		if (Enum.TryParse(keyChar.ToString(), out Keys key) && keyMappings.TryGetValue(key, out EditingMode mode))
 		{
-			case 'a':
-				editingMode = EditingMode.AdjustNode;
-				break;
-			case 'r':
-				editingMode = EditingMode.RemoveNode;
-				break;
-			case 'u':
-				editingMode = EditingMode.MakeUnionNode;
-				break;
-			case 'i':
-				editingMode = EditingMode.MakeIntersectionNode;
-				break;
-			case 's':
-				editingMode = EditingMode.MakeDifferenceNode;
-				break;
-			case 'e':
-				editingMode = EditingMode.EditShape;
-				break;
-			case 'd':
-				editingMode = EditingMode.DeleteTree;
-				break;
-			case 'c':
-				editingMode = EditingMode.CopyTree;
-				break;
-			case 'n':
-				editingMode = EditingMode.CreateNode;
-				break;
-			default:
-				editingMode = EditingMode.None;
-				break;
+			editingMode = mode;
+		}
+		else
+		{
+			editingMode = EditingMode.None;
 		}
 		Invalidate();
 	}
