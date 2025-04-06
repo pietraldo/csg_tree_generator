@@ -14,7 +14,7 @@ namespace csg_tree_generator
 		public static int distanceHorizontal = 50;
 		public Camera camera;
 		
-
+		private Pen pen = new Pen(System.Drawing.Color.Red, 3);
 		public Draw(Camera camera)
 		{
 			this.camera = camera;
@@ -60,29 +60,34 @@ namespace csg_tree_generator
 			}
 			else
 			{
-				g.FillEllipse(System.Drawing.Brushes.LightBlue, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
+				Brush brush = (node.hidenChildren) ? System.Drawing.Brushes.LightCoral : System.Drawing.Brushes.LightBlue;
+				g.FillEllipse(brush, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
 			}
 
 
 			if (node == selected)
 			{
-				g.DrawEllipse(System.Drawing.Pens.Red, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
+				
+				g.DrawEllipse(pen, cc.X - circleRadius * camera.scale, cc.Y - circleRadius * camera.scale, circleRadius * 2 * camera.scale, circleRadius * 2 * camera.scale);
 			}
 
 
 
-
-			if (node.left != null)
+			if(!node.hidenChildren)
 			{
-				DrawLine(node.CanvasCordinates(camera), node.left.CanvasCordinates(camera), g);
-				DrawNode(node.left, g, selected);
-			}
+				if (node.left != null)
+				{
+					DrawLine(node.CanvasCordinates(camera), node.left.CanvasCordinates(camera), g);
+					DrawNode(node.left, g, selected);
+				}
 
-			if (node.right != null)
-			{
-				DrawLine(node.CanvasCordinates(camera), node.right.CanvasCordinates(camera), g);
-				DrawNode(node.right, g, selected);
+				if (node.right != null)
+				{
+					DrawLine(node.CanvasCordinates(camera), node.right.CanvasCordinates(camera), g);
+					DrawNode(node.right, g, selected);
+				}
 			}
+			
 
 
 			string text = "";

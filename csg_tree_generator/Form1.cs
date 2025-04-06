@@ -48,7 +48,8 @@ public partial class mainWindow : Form
 			{ Keys.E, EditingMode.EditShape },
 			{ Keys.D, EditingMode.DeleteTree },
 			{ Keys.C, EditingMode.CopyTree },
-			{ Keys.N, EditingMode.CreateNode }
+			{ Keys.N, EditingMode.CreateNode },
+			{ Keys.H, EditingMode.HideShowChildren }
 		};
 
 	public mainWindow()
@@ -184,6 +185,9 @@ public partial class mainWindow : Form
 						break;
 					case EditingMode.CopyTree:
 						scene.CopyTree(scene.SelectedNode);
+						break;
+					case EditingMode.HideShowChildren:
+						node.hidenChildren = !node.hidenChildren;
 						break;
 					default:
 						mouseMode = MouseMode.MoveTree;
