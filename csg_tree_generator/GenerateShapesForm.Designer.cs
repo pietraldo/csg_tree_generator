@@ -153,6 +153,7 @@
 			txtRadiusMin.Name = "txtRadiusMin";
 			txtRadiusMin.Size = new Size(120, 23);
 			txtRadiusMin.TabIndex = 7;
+			txtRadiusMin.Value = new decimal(new int[] { 1, 0, 0, 65536 });
 			txtRadiusMin.Enter += NumericUpDown_Enter;
 			// 
 			// label1
@@ -199,7 +200,7 @@
 			txtRadiusMax.Name = "txtRadiusMax";
 			txtRadiusMax.Size = new Size(120, 23);
 			txtRadiusMax.TabIndex = 8;
-			txtRadiusMax.Value = new decimal(new int[] { 2, 0, 0, 0 });
+			txtRadiusMax.Value = new decimal(new int[] { 4, 0, 0, 65536 });
 			txtRadiusMax.Enter += NumericUpDown_Enter;
 			// 
 			// txtZMax

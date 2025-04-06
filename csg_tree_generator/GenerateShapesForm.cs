@@ -105,6 +105,9 @@ namespace csg_tree_generator
 				widthMin = (float)gen.txtWidthMin.Value;
 				widthMax = (float)gen.txtWidthMax.Value;
 				replace = gen.chBoxReplace.Checked;
+				sphere = gen.chBoxSphere.Checked;
+				cylinder = gen.chBoxCylinder.Checked;
+				cube = gen.chBoxCube.Checked;
 			}
 		}
 
