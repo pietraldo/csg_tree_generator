@@ -40,6 +40,12 @@ namespace csg_tree_generator
 			}
 		}
 
+		public Node() { }
+		public Node(NodeType type)
+		{
+			this.type = type;
+		}
+
 		public virtual Node Clone()
 		{
 			Node node = new Node();

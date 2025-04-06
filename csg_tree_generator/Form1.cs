@@ -439,5 +439,12 @@ public partial class mainWindow : Form
 	{
 
 	}
+
+	private void btnCreateTree_Click(object sender, EventArgs e)
+	{
+		CreateTreeForm createTreeForm = new CreateTreeForm(scene.trees);
+		createTreeForm.ShowDialog();
+		Invalidate();
+	}
 }
 

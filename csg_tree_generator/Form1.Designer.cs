@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			panel1 = new Panel();
+			chBoxCameraUse = new CheckBox();
 			txtGenerateShapes = new Button();
 			btnResult = new Button();
 			btnSave = new Button();
@@ -44,7 +45,7 @@
 			importToolStripMenuItem = new ToolStripMenuItem();
 			csgProgramViewerToolStripMenuItem = new ToolStripMenuItem();
 			selectToolStripMenuItem = new ToolStripMenuItem();
-			chBoxCameraUse = new CheckBox();
+			btnCreateTree = new Button();
 			panel1.SuspendLayout();
 			menuStrip1.SuspendLayout();
 			SuspendLayout();
@@ -52,6 +53,7 @@
 			// panel1
 			// 
 			panel1.BackColor = Color.Cyan;
+			panel1.Controls.Add(btnCreateTree);
 			panel1.Controls.Add(chBoxCameraUse);
 			panel1.Controls.Add(txtGenerateShapes);
 			panel1.Controls.Add(btnResult);
@@ -66,6 +68,17 @@
 			panel1.Size = new Size(200, 426);
 			panel1.TabIndex = 0;
 			// 
+			// chBoxCameraUse
+			// 
+			chBoxCameraUse.AutoSize = true;
+			chBoxCameraUse.Location = new Point(28, 399);
+			chBoxCameraUse.Name = "chBoxCameraUse";
+			chBoxCameraUse.Size = new Size(127, 19);
+			chBoxCameraUse.TabIndex = 7;
+			chBoxCameraUse.Text = "Use default camera";
+			chBoxCameraUse.UseVisualStyleBackColor = true;
+			chBoxCameraUse.CheckedChanged += chBoxCameraUse_CheckedChanged;
+			// 
 			// txtGenerateShapes
 			// 
 			txtGenerateShapes.Location = new Point(35, 182);
@@ -78,7 +91,7 @@
 			// 
 			// btnResult
 			// 
-			btnResult.Location = new Point(51, 211);
+			btnResult.Location = new Point(35, 370);
 			btnResult.Name = "btnResult";
 			btnResult.Size = new Size(75, 23);
 			btnResult.TabIndex = 5;
@@ -193,16 +206,15 @@
 			selectToolStripMenuItem.Text = "Select";
 			selectToolStripMenuItem.Click += selectToolStripMenuItem_Click;
 			// 
-			// chBoxCameraUse
+			// btnCreateTree
 			// 
-			chBoxCameraUse.AutoSize = true;
-			chBoxCameraUse.Location = new Point(44, 240);
-			chBoxCameraUse.Name = "chBoxCameraUse";
-			chBoxCameraUse.Size = new Size(127, 19);
-			chBoxCameraUse.TabIndex = 7;
-			chBoxCameraUse.Text = "Use default camera";
-			chBoxCameraUse.UseVisualStyleBackColor = true;
-			chBoxCameraUse.CheckedChanged += chBoxCameraUse_CheckedChanged;
+			btnCreateTree.Location = new Point(35, 211);
+			btnCreateTree.Name = "btnCreateTree";
+			btnCreateTree.Size = new Size(103, 23);
+			btnCreateTree.TabIndex = 8;
+			btnCreateTree.Text = "Create tree";
+			btnCreateTree.UseVisualStyleBackColor = true;
+			btnCreateTree.Click += btnCreateTree_Click;
 			// 
 			// mainWindow
 			// 
@@ -249,5 +261,6 @@
 		private ToolStripMenuItem selectToolStripMenuItem;
 		private Button txtGenerateShapes;
 		private CheckBox chBoxCameraUse;
+		private Button btnCreateTree;
 	}
 }
