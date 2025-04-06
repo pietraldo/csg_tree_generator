@@ -21,7 +21,8 @@ public enum EditingMode
 	MakeDifferenceNode,
 	EditShape,
 	DeleteTree,
-	CopyTree
+	CopyTree,
+	CreateNode
 }
 
 public partial class mainWindow : Form
@@ -188,6 +189,12 @@ public partial class mainWindow : Form
 			}
 		}
 
+		if(editingMode== EditingMode.CreateNode)
+		{
+			scene.CreateNode(worldCordinates);
+			editingMode = EditingMode.None;
+		}
+
 		if (mouseMode == MouseMode.None && !changedMode)
 		{
 			lastMousePoint = new CanvasCordinates(e.X, e.Y);
@@ -224,6 +231,9 @@ public partial class mainWindow : Form
 				break;
 			case 'c':
 				editingMode = EditingMode.CopyTree;
+				break;
+			case 'n':
+				editingMode = EditingMode.CreateNode;
 				break;
 			default:
 				editingMode = EditingMode.None;

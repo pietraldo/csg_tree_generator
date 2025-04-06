@@ -288,5 +288,13 @@ namespace csg_tree_generator
 			AdjustTree(root);
 
 		}
+
+		public void CreateNode(WorldCordinates worldCordinates)
+		{
+			Node node = new Node(NodeType.Union);
+			node.X = worldCordinates.X;
+			node.Y = worldCordinates.Y;
+			trees.Add(node);
+		}
 	}
 }
