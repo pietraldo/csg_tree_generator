@@ -115,6 +115,10 @@ namespace csg_tree_generator
 
 		public bool JoinTrees(Node node)
 		{
+			if(node.type == NodeType.Sphere || node.type == NodeType.Cube || node.type == NodeType.Cylinder)
+			{
+				return false;
+			}
 			if (SelectedNode == null) return false;
 			if (!trees.Contains(SelectedNode)) return false;
 

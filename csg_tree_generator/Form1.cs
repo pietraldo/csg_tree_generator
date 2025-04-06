@@ -107,7 +107,6 @@ public partial class mainWindow : Form
 		WorldCordinates worldCordinates = new CanvasCordinates(e.X, e.Y).WorldCordinates(scene.camera);
 		if (mouseMode == MouseMode.MoveTree)
 		{
-
 			foreach (Node root in scene.trees)
 			{
 				Node? node = root.DetectNode(worldCordinates);
