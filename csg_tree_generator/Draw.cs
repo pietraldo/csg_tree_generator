@@ -38,6 +38,34 @@ namespace csg_tree_generator
         {
             g.DrawLine(System.Drawing.Pens.LightBlue, cc1.X, cc1.Y, cc2.X, cc2.Y);
         }
+        private void DrawArrow(CanvasCordinates cc1, CanvasCordinates cc2, System.Drawing.Graphics g)
+        {
+            // Draw main line
+            g.DrawLine(System.Drawing.Pens.LightBlue, cc1.X, cc1.Y, cc2.X, cc2.Y);
+
+            // Calculate the arrowhead
+            double arrowHeadAngle = Math.PI / 8; // 22.5 degrees
+            double arrowHeadLength = 10 * camera.scale;
+
+            double dx = cc2.X - cc1.X;
+            double dy = cc2.Y - cc1.Y;
+            double angle = Math.Atan2(dy, dx);
+
+            double plusX = Math.Cos(angle) * circleRadius*camera.scale;
+            double plusY = Math.Sin(angle) * circleRadius*camera.scale;
+
+            // Point 1 of the arrowhead
+            double x1 = cc2.X - (int)plusX - arrowHeadLength * Math.Cos(angle - arrowHeadAngle);
+            double y1 = cc2.Y - (int)plusY - arrowHeadLength * Math.Sin(angle - arrowHeadAngle);
+
+            // Point 2 of the arrowhead
+            double x2 = cc2.X - (int)plusX - arrowHeadLength * Math.Cos(angle + arrowHeadAngle);
+            double y2 = cc2.Y - (int)plusY - arrowHeadLength * Math.Sin(angle + arrowHeadAngle);
+
+            // Draw the arrowhead
+            g.DrawLine(System.Drawing.Pens.LightBlue, cc2.X - (int)plusX, cc2.Y-(int)plusY, (float)x1, (float)y1);
+            g.DrawLine(System.Drawing.Pens.LightBlue, cc2.X - (int)plusX, cc2.Y-(int)plusY, (float)x2, (float)y2);
+        }
 
         public void DrawNode(Node node, System.Drawing.Graphics g, Node selected)
         {
@@ -77,13 +105,13 @@ namespace csg_tree_generator
             {
                 if (node.left != null)
                 {
-                    DrawLine(node.CanvasCordinates(camera), node.left.CanvasCordinates(camera), g);
+                    DrawArrow(node.CanvasCordinates(camera), node.left.CanvasCordinates(camera), g);
                     DrawNode(node.left, g, selected);
                 }
 
                 if (node.right != null)
                 {
-                    DrawLine(node.CanvasCordinates(camera), node.right.CanvasCordinates(camera), g);
+                    DrawArrow(node.CanvasCordinates(camera), node.right.CanvasCordinates(camera), g);
                     DrawNode(node.right, g, selected);
                 }
             }
