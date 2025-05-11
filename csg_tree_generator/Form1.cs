@@ -152,7 +152,8 @@ public partial class mainWindow : Form
 						scene.DetachTree(node);
 						break;
 					case EditingMode.AdjustNode:
-						scene.AdjustTree(node);
+						int treeHeight=scene.CountTreeHeight(node);
+						scene.AdjustTree(node, treeHeight);
 						break;
 					case EditingMode.MakeUnionNode:
 						node.type = NodeType.Union;
