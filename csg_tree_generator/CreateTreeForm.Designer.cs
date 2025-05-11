@@ -20,108 +20,118 @@
 			base.Dispose(disposing);
 		}
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent()
-		{
-			rdLeft = new RadioButton();
-			rdRight = new RadioButton();
-			rdBalanced = new RadioButton();
-			txtHeight = new NumericUpDown();
-			btnGenerate = new Button();
-			label1 = new Label();
-			((System.ComponentModel.ISupportInitialize)txtHeight).BeginInit();
-			SuspendLayout();
-			// 
-			// rdLeft
-			// 
-			rdLeft.AutoSize = true;
-			rdLeft.Location = new Point(12, 12);
-			rdLeft.Name = "rdLeft";
-			rdLeft.Size = new Size(68, 19);
-			rdLeft.TabIndex = 0;
-			rdLeft.Text = "Left tree";
-			rdLeft.UseVisualStyleBackColor = true;
-			// 
-			// rdRight
-			// 
-			rdRight.AutoSize = true;
-			rdRight.Location = new Point(12, 37);
-			rdRight.Name = "rdRight";
-			rdRight.Size = new Size(76, 19);
-			rdRight.TabIndex = 1;
-			rdRight.Text = "Right tree";
-			rdRight.UseVisualStyleBackColor = true;
-			// 
-			// rdBalanced
-			// 
-			rdBalanced.AutoSize = true;
-			rdBalanced.Checked = true;
-			rdBalanced.Location = new Point(12, 62);
-			rdBalanced.Name = "rdBalanced";
-			rdBalanced.Size = new Size(96, 19);
-			rdBalanced.TabIndex = 2;
-			rdBalanced.TabStop = true;
-			rdBalanced.Text = "Balanced tree";
-			rdBalanced.UseVisualStyleBackColor = true;
-			// 
-			// txtHeight
-			// 
-			txtHeight.Location = new Point(12, 87);
-			txtHeight.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
-			txtHeight.Name = "txtHeight";
-			txtHeight.Size = new Size(96, 23);
-			txtHeight.TabIndex = 3;
-			txtHeight.Value = new decimal(new int[] { 3, 0, 0, 0 });
-			// 
-			// btnGenerate
-			// 
-			btnGenerate.Location = new Point(12, 116);
-			btnGenerate.Name = "btnGenerate";
-			btnGenerate.Size = new Size(75, 23);
-			btnGenerate.TabIndex = 4;
-			btnGenerate.Text = "Generate";
-			btnGenerate.UseVisualStyleBackColor = true;
-			btnGenerate.Click += btnGenerate_Click;
-			// 
-			// label1
-			// 
-			label1.AutoSize = true;
-			label1.Location = new Point(114, 89);
-			label1.Name = "label1";
-			label1.Size = new Size(66, 15);
-			label1.TabIndex = 5;
-			label1.Text = "Tree height";
-			// 
-			// CreateTreeForm
-			// 
-			AutoScaleDimensions = new SizeF(7F, 15F);
-			AutoScaleMode = AutoScaleMode.Font;
-			ClientSize = new Size(244, 168);
-			Controls.Add(label1);
-			Controls.Add(btnGenerate);
-			Controls.Add(txtHeight);
-			Controls.Add(rdBalanced);
-			Controls.Add(rdRight);
-			Controls.Add(rdLeft);
-			Name = "CreateTreeForm";
-			Text = "CreateTreeForm";
-			((System.ComponentModel.ISupportInitialize)txtHeight).EndInit();
-			ResumeLayout(false);
-			PerformLayout();
-		}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            txtHeight = new NumericUpDown();
+            btnGenerate = new Button();
+            label1 = new Label();
+            trLeft = new TrackBar();
+            label2 = new Label();
+            label3 = new Label();
+            trRight = new TrackBar();
+            ((System.ComponentModel.ISupportInitialize)txtHeight).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trLeft).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)trRight).BeginInit();
+            SuspendLayout();
+            // 
+            // txtHeight
+            // 
+            txtHeight.Location = new Point(9, 102);
+            txtHeight.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            txtHeight.Name = "txtHeight";
+            txtHeight.Size = new Size(120, 23);
+            txtHeight.TabIndex = 3;
+            txtHeight.Value = new decimal(new int[] { 3, 0, 0, 0 });
+            // 
+            // btnGenerate
+            // 
+            btnGenerate.Location = new Point(9, 131);
+            btnGenerate.Name = "btnGenerate";
+            btnGenerate.Size = new Size(75, 23);
+            btnGenerate.TabIndex = 4;
+            btnGenerate.Text = "Generate";
+            btnGenerate.UseVisualStyleBackColor = true;
+            btnGenerate.Click += btnGenerate_Click;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(135, 104);
+            label1.Name = "label1";
+            label1.Size = new Size(66, 15);
+            label1.TabIndex = 5;
+            label1.Text = "Tree height";
+            // 
+            // trLeft
+            // 
+            trLeft.Location = new Point(56, 12);
+            trLeft.Maximum = 100;
+            trLeft.Name = "trLeft";
+            trLeft.Size = new Size(165, 45);
+            trLeft.TabIndex = 10;
+            trLeft.Value = 100;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(12, 21);
+            label2.Name = "label2";
+            label2.Size = new Size(27, 15);
+            label2.TabIndex = 11;
+            label2.Text = "Left";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(9, 51);
+            label3.Name = "label3";
+            label3.Size = new Size(35, 15);
+            label3.TabIndex = 12;
+            label3.Text = "Right";
+            // 
+            // trRight
+            // 
+            trRight.Location = new Point(56, 51);
+            trRight.Maximum = 100;
+            trRight.Name = "trRight";
+            trRight.Size = new Size(165, 45);
+            trRight.TabIndex = 13;
+            trRight.Value = 100;
+            // 
+            // CreateTreeForm
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(331, 212);
+            Controls.Add(trRight);
+            Controls.Add(label3);
+            Controls.Add(label2);
+            Controls.Add(trLeft);
+            Controls.Add(label1);
+            Controls.Add(btnGenerate);
+            Controls.Add(txtHeight);
+            Name = "CreateTreeForm";
+            Text = "CreateTreeForm";
+            ((System.ComponentModel.ISupportInitialize)txtHeight).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trLeft).EndInit();
+            ((System.ComponentModel.ISupportInitialize)trRight).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
+        }
 
-		#endregion
-
-		private RadioButton rdLeft;
-		private RadioButton rdRight;
-		private RadioButton rdBalanced;
-		private NumericUpDown txtHeight;
+        #endregion
+        private NumericUpDown txtHeight;
 		private Button btnGenerate;
 		private Label label1;
-	}
+        private TrackBar trLeft;
+        private Label label2;
+        private Label label3;
+        private TrackBar trRight;
+    }
 }
