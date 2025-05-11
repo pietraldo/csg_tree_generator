@@ -144,6 +144,7 @@ public partial class mainWindow : Form
         WorldCordinates worldCordinates = new CanvasCordinates(e.X, e.Y).WorldCordinates(scene.camera);
         lastMousePoint = new CanvasCordinates(e.X, e.Y);
         lastClickPoint = new CanvasCordinates(e.X, e.Y);
+        scene.SelectedNode = null;
 
         Node? node = scene.GetNode(worldCordinates);
         if (node != null)
@@ -378,12 +379,14 @@ public partial class mainWindow : Form
         else if (node.type == NodeType.Cylinder)
         {
             Cylinder cylinder = (Cylinder)node;
-
+            EditCylinder cylinderEdit = new EditCylinder(cylinder);
+            cylinderEdit.ShowDialog();
         }
         else if (node.type == NodeType.Cube)
         {
             Cube cube = (Cube)node;
-
+            CubeEdit cubeEdit = new CubeEdit(cube);
+            cubeEdit.ShowDialog();
         }
         Invalidate();
     }
