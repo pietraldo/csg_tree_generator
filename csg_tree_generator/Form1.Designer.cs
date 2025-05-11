@@ -56,6 +56,7 @@
             createSphereToolStripMenuItem = new ToolStripMenuItem();
             createCylinderToolStripMenuItem = new ToolStripMenuItem();
             createCubeToolStripMenuItem = new ToolStripMenuItem();
+            infoToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ctxNodeMenu.SuspendLayout();
@@ -155,7 +156,7 @@
             // 
             // csgProgramViewerToolStripMenuItem
             // 
-            csgProgramViewerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { selectToolStripMenuItem });
+            csgProgramViewerToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { selectToolStripMenuItem, infoToolStripMenuItem });
             csgProgramViewerToolStripMenuItem.Name = "csgProgramViewerToolStripMenuItem";
             csgProgramViewerToolStripMenuItem.Size = new Size(125, 20);
             csgProgramViewerToolStripMenuItem.Text = "Csg program viewer";
@@ -163,7 +164,7 @@
             // selectToolStripMenuItem
             // 
             selectToolStripMenuItem.Name = "selectToolStripMenuItem";
-            selectToolStripMenuItem.Size = new Size(105, 22);
+            selectToolStripMenuItem.Size = new Size(180, 22);
             selectToolStripMenuItem.Text = "Select";
             selectToolStripMenuItem.Click += selectToolStripMenuItem_Click;
             // 
@@ -271,6 +272,13 @@
             createCubeToolStripMenuItem.Text = "Create cube";
             createCubeToolStripMenuItem.Click += createCubeToolStripMenuItem_Click;
             // 
+            // infoToolStripMenuItem
+            // 
+            infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            infoToolStripMenuItem.Size = new Size(180, 22);
+            infoToolStripMenuItem.Text = "Info";
+            infoToolStripMenuItem.Click += infoToolStripMenuItem_Click;
+            // 
             // mainWindow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -326,5 +334,6 @@
         private ToolStripMenuItem createSphereToolStripMenuItem;
         private ToolStripMenuItem createCylinderToolStripMenuItem;
         private ToolStripMenuItem createCubeToolStripMenuItem;
+        private ToolStripMenuItem infoToolStripMenuItem;
     }
 }

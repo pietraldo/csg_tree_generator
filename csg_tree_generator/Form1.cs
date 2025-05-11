@@ -178,7 +178,7 @@ public partial class mainWindow : Form
     }
 
 
-    
+
 
 
     private void selectedTreeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -192,7 +192,7 @@ public partial class mainWindow : Form
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     scene.ExportTree(scene.SelectedNode, saveFileDialog.FileName);
-                    if(!scene.IsCorrectTree(scene.SelectedNode))
+                    if (!scene.IsCorrectTree(scene.SelectedNode))
                     {
                         MessageBox.Show("Tree is not correct", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
@@ -482,6 +482,11 @@ public partial class mainWindow : Form
         cube.EdgeLength = 5.0f;
         scene.trees.Add(cube);
         Invalidate();
+    }
+
+    private void infoToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        MessageBox.Show(csgProgramPath, "CSG Program Path", MessageBoxButtons.OK, MessageBoxIcon.Information);
     }
 }
 
