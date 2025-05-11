@@ -179,11 +179,7 @@ public partial class mainWindow : Form
     }
 
 
-    private void btnSave_Click(object sender, EventArgs e)
-    {
-        if (scene.SelectedNode.EditShape(txtEdit.Text))
-            txtEdit.Text = "";
-    }
+    
 
 
     private void selectedTreeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -376,17 +372,18 @@ public partial class mainWindow : Form
         if (node.type == NodeType.Sphere)
         {
             Sphere sphere = (Sphere)node;
-            txtEdit.Text = sphere.ToString();
+            SphereEdit sphereEdit = new SphereEdit(sphere);
+            sphereEdit.ShowDialog();
         }
         else if (node.type == NodeType.Cylinder)
         {
             Cylinder cylinder = (Cylinder)node;
-            txtEdit.Text = cylinder.ToString();
+
         }
         else if (node.type == NodeType.Cube)
         {
             Cube cube = (Cube)node;
-            txtEdit.Text = cube.ToString();
+
         }
         Invalidate();
     }

@@ -34,8 +34,6 @@
             chBoxCameraUse = new CheckBox();
             txtGenerateShapes = new Button();
             btnResult = new Button();
-            btnSave = new Button();
-            txtEdit = new TextBox();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exportToolStripMenuItem = new ToolStripMenuItem();
@@ -71,8 +69,6 @@
             panel1.Controls.Add(chBoxCameraUse);
             panel1.Controls.Add(txtGenerateShapes);
             panel1.Controls.Add(btnResult);
-            panel1.Controls.Add(btnSave);
-            panel1.Controls.Add(txtEdit);
             panel1.Dock = DockStyle.Right;
             panel1.Location = new Point(600, 24);
             panel1.Name = "panel1";
@@ -119,23 +115,6 @@
             btnResult.Text = "See Result";
             btnResult.UseVisualStyleBackColor = true;
             btnResult.Click += btnResult_Click;
-            // 
-            // btnSave
-            // 
-            btnSave.Location = new Point(51, 55);
-            btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 23);
-            btnSave.TabIndex = 4;
-            btnSave.Text = "Save";
-            btnSave.UseVisualStyleBackColor = true;
-            btnSave.Click += btnSave_Click;
-            // 
-            // txtEdit
-            // 
-            txtEdit.Location = new Point(3, 26);
-            txtEdit.Name = "txtEdit";
-            txtEdit.Size = new Size(194, 23);
-            txtEdit.TabIndex = 3;
             // 
             // menuStrip1
             // 
@@ -321,8 +300,6 @@
         #endregion
 
         private Panel panel1;
-		private TextBox txtEdit;
-		private Button btnSave;
 		private MenuStrip menuStrip1;
 		private ToolStripMenuItem fileToolStripMenuItem;
 		private ToolStripMenuItem exportToolStripMenuItem;
