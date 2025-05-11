@@ -36,9 +36,6 @@
             btnResult = new Button();
             btnSave = new Button();
             txtEdit = new TextBox();
-            btnCreateCube = new Button();
-            btnCreateCylinder = new Button();
-            btnCreatSphere = new Button();
             menuStrip1 = new MenuStrip();
             fileToolStripMenuItem = new ToolStripMenuItem();
             exportToolStripMenuItem = new ToolStripMenuItem();
@@ -58,6 +55,9 @@
             hideUnHideTreeToolStripMenuItem = new ToolStripMenuItem();
             ctxSceneMenu = new ContextMenuStrip(components);
             createNodeToolStripMenuItem = new ToolStripMenuItem();
+            createSphereToolStripMenuItem = new ToolStripMenuItem();
+            createCylinderToolStripMenuItem = new ToolStripMenuItem();
+            createCubeToolStripMenuItem = new ToolStripMenuItem();
             panel1.SuspendLayout();
             menuStrip1.SuspendLayout();
             ctxNodeMenu.SuspendLayout();
@@ -73,9 +73,6 @@
             panel1.Controls.Add(btnResult);
             panel1.Controls.Add(btnSave);
             panel1.Controls.Add(txtEdit);
-            panel1.Controls.Add(btnCreateCube);
-            panel1.Controls.Add(btnCreateCylinder);
-            panel1.Controls.Add(btnCreatSphere);
             panel1.Dock = DockStyle.Right;
             panel1.Location = new Point(600, 24);
             panel1.Name = "panel1";
@@ -139,36 +136,6 @@
             txtEdit.Name = "txtEdit";
             txtEdit.Size = new Size(194, 23);
             txtEdit.TabIndex = 3;
-            // 
-            // btnCreateCube
-            // 
-            btnCreateCube.Location = new Point(35, 153);
-            btnCreateCube.Name = "btnCreateCube";
-            btnCreateCube.Size = new Size(103, 23);
-            btnCreateCube.TabIndex = 2;
-            btnCreateCube.Text = "Create Cube";
-            btnCreateCube.UseVisualStyleBackColor = true;
-            btnCreateCube.Click += btnCreateCube_Click;
-            // 
-            // btnCreateCylinder
-            // 
-            btnCreateCylinder.Location = new Point(35, 124);
-            btnCreateCylinder.Name = "btnCreateCylinder";
-            btnCreateCylinder.Size = new Size(103, 23);
-            btnCreateCylinder.TabIndex = 1;
-            btnCreateCylinder.Text = "Create Cylinder";
-            btnCreateCylinder.UseVisualStyleBackColor = true;
-            btnCreateCylinder.Click += btnCreateCylinder_Click;
-            // 
-            // btnCreatSphere
-            // 
-            btnCreatSphere.Location = new Point(35, 95);
-            btnCreatSphere.Name = "btnCreatSphere";
-            btnCreatSphere.Size = new Size(103, 23);
-            btnCreatSphere.TabIndex = 0;
-            btnCreatSphere.Text = "Create Sphere";
-            btnCreatSphere.UseVisualStyleBackColor = true;
-            btnCreatSphere.Click += btnCreatSphere_Click;
             // 
             // menuStrip1
             // 
@@ -293,16 +260,37 @@
             // 
             // ctxSceneMenu
             // 
-            ctxSceneMenu.Items.AddRange(new ToolStripItem[] { createNodeToolStripMenuItem });
+            ctxSceneMenu.Items.AddRange(new ToolStripItem[] { createNodeToolStripMenuItem, createSphereToolStripMenuItem, createCylinderToolStripMenuItem, createCubeToolStripMenuItem });
             ctxSceneMenu.Name = "ctxSceneMenu";
-            ctxSceneMenu.Size = new Size(139, 26);
+            ctxSceneMenu.Size = new Size(154, 92);
             // 
             // createNodeToolStripMenuItem
             // 
             createNodeToolStripMenuItem.Name = "createNodeToolStripMenuItem";
-            createNodeToolStripMenuItem.Size = new Size(138, 22);
+            createNodeToolStripMenuItem.Size = new Size(153, 22);
             createNodeToolStripMenuItem.Text = "Create node";
             createNodeToolStripMenuItem.Click += createNodeToolStripMenuItem_Click;
+            // 
+            // createSphereToolStripMenuItem
+            // 
+            createSphereToolStripMenuItem.Name = "createSphereToolStripMenuItem";
+            createSphereToolStripMenuItem.Size = new Size(153, 22);
+            createSphereToolStripMenuItem.Text = "Create sphere";
+            createSphereToolStripMenuItem.Click += createSphereToolStripMenuItem_Click;
+            // 
+            // createCylinderToolStripMenuItem
+            // 
+            createCylinderToolStripMenuItem.Name = "createCylinderToolStripMenuItem";
+            createCylinderToolStripMenuItem.Size = new Size(153, 22);
+            createCylinderToolStripMenuItem.Text = "Create cylinder";
+            createCylinderToolStripMenuItem.Click += createCylinderToolStripMenuItem_Click;
+            // 
+            // createCubeToolStripMenuItem
+            // 
+            createCubeToolStripMenuItem.Name = "createCubeToolStripMenuItem";
+            createCubeToolStripMenuItem.Size = new Size(153, 22);
+            createCubeToolStripMenuItem.Text = "Create cube";
+            createCubeToolStripMenuItem.Click += createCubeToolStripMenuItem_Click;
             // 
             // mainWindow
             // 
@@ -317,7 +305,6 @@
             Text = "Form1";
             FormClosed += mainWindow_FormClosed;
             Paint += mainWindow_Paint;
-            KeyPress += mainWindow_KeyPress;
             MouseDown += mainWindow_MouseDown;
             MouseMove += mainWindow_MouseMove;
             MouseUp += mainWindow_MouseUp;
@@ -334,9 +321,6 @@
         #endregion
 
         private Panel panel1;
-		private Button btnCreateCube;
-		private Button btnCreateCylinder;
-		private Button btnCreatSphere;
 		private TextBox txtEdit;
 		private Button btnSave;
 		private MenuStrip menuStrip1;
@@ -362,5 +346,8 @@
         private ToolStripMenuItem hideUnHideTreeToolStripMenuItem;
         private ContextMenuStrip ctxSceneMenu;
         private ToolStripMenuItem createNodeToolStripMenuItem;
+        private ToolStripMenuItem createSphereToolStripMenuItem;
+        private ToolStripMenuItem createCylinderToolStripMenuItem;
+        private ToolStripMenuItem createCubeToolStripMenuItem;
     }
 }

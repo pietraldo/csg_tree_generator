@@ -27,7 +27,7 @@ public partial class mainWindow : Form
     string saving_tree_path = "tree.txt";
     string camera_path = "camera.ini";
 
-   
+
     public mainWindow()
     {
         InitializeComponent();
@@ -100,11 +100,11 @@ public partial class mainWindow : Form
         Node node = scene.SelectedNode;
 
 
-        if (e.Button==MouseButtons.Left)
+        if (e.Button == MouseButtons.Left)
         {
 
         }
-        else if(e.Button == MouseButtons.Right)
+        else if (e.Button == MouseButtons.Right)
         {
             if (lastClickPoint.X == canvasCordinates.X && lastClickPoint.Y == canvasCordinates.Y)
             {
@@ -133,7 +133,7 @@ public partial class mainWindow : Form
                 }
             }
         }
-       
+
         mouseMode = MouseMode.None;
     }
 
@@ -178,28 +178,6 @@ public partial class mainWindow : Form
         Invalidate();
     }
 
-    private void mainWindow_KeyPress(object sender, KeyPressEventArgs e)
-    {
-        
-    }
-
-    private void btnCreatSphere_Click(object sender, EventArgs e)
-    {
-        Sphere sphere = new Sphere();
-        sphere.X = 100;
-        sphere.Y = 100;
-        sphere.type = NodeType.Sphere;
-        sphere.Radius = 3.0f;
-        sphere.Red = 255;
-        sphere.Green = 0;
-        sphere.Blue = 0;
-        sphere.PosX = 0;
-        sphere.PosY = 0;
-        sphere.PosZ = 0;
-
-        scene.trees.Add(sphere);
-        Invalidate();
-    }
 
     private void btnSave_Click(object sender, EventArgs e)
     {
@@ -207,44 +185,6 @@ public partial class mainWindow : Form
             txtEdit.Text = "";
     }
 
-    private void btnCreateCylinder_Click(object sender, EventArgs e)
-    {
-        Cylinder cylinder = new Cylinder();
-        cylinder.X = 200;
-        cylinder.Y = 100;
-        cylinder.type = NodeType.Cylinder;
-        cylinder.Radius = 3.0f;
-        cylinder.Height = 5.0f;
-        cylinder.Red = 0;
-        cylinder.Green = 255;
-        cylinder.Blue = 0;
-        cylinder.PosX = 0;
-        cylinder.PosY = 0;
-        cylinder.PosZ = 0;
-        cylinder.RotationX = 0;
-        cylinder.RotationY = 1;
-        cylinder.RotationZ = 0;
-
-        scene.trees.Add(cylinder);
-        Invalidate();
-    }
-
-    private void btnCreateCube_Click(object sender, EventArgs e)
-    {
-        Cube cube = new Cube();
-        cube.X = 180;
-        cube.Y = 100;
-        cube.type = NodeType.Cube;
-        cube.Red = 0;
-        cube.Green = 0;
-        cube.Blue = 255;
-        cube.PosX = 0;
-        cube.PosY = 0;
-        cube.PosZ = 0;
-        cube.EdgeLength = 5.0f;
-        scene.trees.Add(cube);
-        Invalidate();
-    }
 
     private void selectedTreeToolStripMenuItem_Click(object sender, EventArgs e)
     {
@@ -472,6 +412,72 @@ public partial class mainWindow : Form
     private void createNodeToolStripMenuItem_Click(object sender, EventArgs e)
     {
         scene.CreateNode(lastMousePoint.WorldCordinates(scene.camera));
+    }
+
+    private void createSphereToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        CanvasCordinates canvasCordinates = new CanvasCordinates(lastClickPoint.X, lastClickPoint.Y);
+        WorldCordinates wc = canvasCordinates.WorldCordinates(scene.camera);
+
+        Sphere sphere = new Sphere();
+        sphere.X = wc.X;
+        sphere.Y = wc.Y;
+        sphere.type = NodeType.Sphere;
+        sphere.Radius = 3.0f;
+        sphere.Red = 255;
+        sphere.Green = 0;
+        sphere.Blue = 0;
+        sphere.PosX = 0;
+        sphere.PosY = 0;
+        sphere.PosZ = 0;
+
+        scene.trees.Add(sphere);
+        Invalidate();
+    }
+
+    private void createCylinderToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        CanvasCordinates canvasCordinates = new CanvasCordinates(lastClickPoint.X, lastClickPoint.Y);
+        WorldCordinates wc = canvasCordinates.WorldCordinates(scene.camera);
+
+        Cylinder cylinder = new Cylinder();
+        cylinder.X = wc.X;
+        cylinder.Y = wc.Y;
+        cylinder.type = NodeType.Cylinder;
+        cylinder.Radius = 3.0f;
+        cylinder.Height = 5.0f;
+        cylinder.Red = 0;
+        cylinder.Green = 255;
+        cylinder.Blue = 0;
+        cylinder.PosX = 0;
+        cylinder.PosY = 0;
+        cylinder.PosZ = 0;
+        cylinder.RotationX = 0;
+        cylinder.RotationY = 1;
+        cylinder.RotationZ = 0;
+
+        scene.trees.Add(cylinder);
+        Invalidate();
+    }
+
+    private void createCubeToolStripMenuItem_Click(object sender, EventArgs e)
+    {
+        CanvasCordinates canvasCordinates = new CanvasCordinates(lastClickPoint.X, lastClickPoint.Y);
+        WorldCordinates wc = canvasCordinates.WorldCordinates(scene.camera);
+
+        Cube cube = new Cube();
+        cube.X = wc.X;
+        cube.Y = wc.Y;
+        cube.type = NodeType.Cube;
+        cube.Red = 0;
+        cube.Green = 0;
+        cube.Blue = 255;
+        cube.PosX = 0;
+        cube.PosY = 0;
+        cube.PosZ = 0;
+        cube.EdgeLength = 5.0f;
+        scene.trees.Add(cube);
+        Invalidate();
     }
 }
 
