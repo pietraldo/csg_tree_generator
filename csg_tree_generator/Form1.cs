@@ -137,8 +137,6 @@ public partial class mainWindow : Form
         mouseMode = MouseMode.None;
     }
 
-
-
     private void mainWindow_MouseDown(object sender, MouseEventArgs e)
     {
         WorldCordinates worldCordinates = new CanvasCordinates(e.X, e.Y).WorldCordinates(scene.camera);
@@ -194,6 +192,10 @@ public partial class mainWindow : Form
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     scene.ExportTree(scene.SelectedNode, saveFileDialog.FileName);
+                    if(!scene.IsCorrectTree(scene.SelectedNode))
+                    {
+                        MessageBox.Show("Tree is not correct", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
                 }
             }
         }
@@ -321,6 +323,7 @@ public partial class mainWindow : Form
         }
         GenerateShapesForm generateShapesForm = new GenerateShapesForm(scene.SelectedNode);
         generateShapesForm.ShowDialog();
+        scene.AdjustTree(scene.SelectedNode, scene.CountTreeHeight(scene.SelectedNode));
     }
 
     private void chBoxCameraUse_CheckedChanged(object sender, EventArgs e)
@@ -400,6 +403,7 @@ public partial class mainWindow : Form
     private void copyTreeToolStripMenuItem_Click(object sender, EventArgs e)
     {
         scene.CopyTree(scene.SelectedNode);
+        scene.AdjustTree(scene.SelectedNode);
         Invalidate();
     }
 

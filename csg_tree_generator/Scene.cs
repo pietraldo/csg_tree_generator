@@ -95,7 +95,10 @@ namespace csg_tree_generator
             int rightHeight = CountTreeHeight(node.right);
             return Math.Max(leftHeight, rightHeight) + 1;
         }
-
+        public void AdjustTree(Node node)
+        {
+            AdjustTree(node, CountTreeHeight(node));
+        }
         public void AdjustTree(Node node, int treeHeight, int nodeHeight = 0)
         {
             if (node == null) return;
@@ -309,5 +312,28 @@ namespace csg_tree_generator
             node.Y = worldCordinates.Y;
             trees.Add(node);
         }
+
+        public bool IsCorrectNode(Node node)
+        {
+            if (node.left == null && node.right == null)
+            {
+                return node.type == NodeType.Sphere || node.type == NodeType.Cube || node.type == NodeType.Cylinder;
+            }
+
+            return (node.left != null && node.right != null);
+        }
+
+        public bool IsCorrectTree(Node node)
+        {
+            if (node == null) return true;
+
+            if (!IsCorrectNode(node))
+            {
+                return false;
+            }
+
+            return IsCorrectTree(node.left) && IsCorrectTree(node.right);
+        }
+
     }
 }
